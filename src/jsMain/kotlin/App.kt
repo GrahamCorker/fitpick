@@ -3,8 +3,12 @@ import react.dom.*
 import kotlinext.js.*
 import kotlinx.html.js.*
 import kotlinx.coroutines.*
+import kotlinx.html.InputType
+import smallComponents.InputComponent
 
 private val scope = MainScope()
+
+
 
 val App = functionalComponent<RProps> { _ ->
     val (clothingList, setClothingList) = useState(emptyList<ClothingListItem>())
@@ -18,6 +22,7 @@ val App = functionalComponent<RProps> { _ ->
     h1 {
         +"Full-Stack Clothing List"
     }
+
     ul {
         clothingList.sortedByDescending(ClothingListItem::priority).forEach { item ->
             li {
@@ -34,15 +39,17 @@ val App = functionalComponent<RProps> { _ ->
     }
 
     child(
-        InputComponent,
-        props = jsObject {
-            onSubmit = { input ->
-                val cartItem = ClothingListItem(input.replace("!", ""), input.count { it == '!'})
-                scope.launch {
-                    addClothingListItem(cartItem)
-                    setClothingList(getClothingList())
+            InputComponent,
+            props = jsObject {
+                onSubmit = { input ->
+                    val cartItem = ClothingListItem(input.replace("!", ""), input.count { it == '!'})
+                    scope.launch {
+                        addClothingListItem(cartItem)
+                        setClothingList(getClothingList())
+                    }
                 }
+                onChange = {}
+                type = InputType.text
             }
-        }
     )
 }

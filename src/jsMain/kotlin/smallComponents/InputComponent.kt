@@ -1,3 +1,5 @@
+package smallComponents
+
 import react.*
 import react.dom.*
 import kotlinx.html.js.*
@@ -7,6 +9,9 @@ import org.w3c.dom.HTMLInputElement
 
 external interface InputProps : RProps {
     var onSubmit: (String) -> Unit
+    var onChange: (String) -> Unit
+    var type: InputType
+    //Current types are "password" for password inputs and "text" for standard text inputs
 }
 
 val InputComponent = functionalComponent<InputProps> { props ->
@@ -25,9 +30,10 @@ val InputComponent = functionalComponent<InputProps> { props ->
 
     form {
         attrs.onSubmitFunction = submitHandler
-        input (InputType.text) {
-            attrs.onChangeFunction = changeHandler
-            attrs.value = text
-        }
+            input (props.type) {
+                attrs.onChangeFunction = changeHandler
+                attrs.value = text
+                props.onChange(text)
+            }
     }
 }
