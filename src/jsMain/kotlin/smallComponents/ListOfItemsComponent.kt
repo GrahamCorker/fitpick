@@ -1,5 +1,6 @@
 package smallComponents
 
+import ClothingItem
 import ClothingList
 import react.*
 import react.dom.*
@@ -7,7 +8,7 @@ import kotlinx.css.*
 import styled.*
 
 external interface ItemProps : RProps {
-    var item:ClothingList
+    var item:ClothingItem
 
 }
 
@@ -22,7 +23,7 @@ val ListOfItems = functionalComponent<ItemProps> { props ->
         }
 
         styledH3 {
-            +props.item.name
+            +props.item.title
         }
 
         p {
@@ -46,7 +47,7 @@ val ListOfItems = functionalComponent<ItemProps> { props ->
                 maxWidth = 200.px
             }
             attrs {
-                src = props.item.imageLink
+                src = props.item.img
             }
         }
     }

@@ -8,6 +8,7 @@ import io.ktor.routing.*
 import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import service.*
 
 val clothingList = mutableListOf(
     ClothingListItem("Shirt", 1),
@@ -29,7 +30,23 @@ fun main() {
         install(Compression) {
             gzip()
         }
+
+        DatabaseFactory.init()
+
         routing {
+            route(ClothingItem.path) {
+                get("/all"){
+                    val clothingList = clothingService.getAllClothingItems()
+                    call.respond(clothingList)
+                }
+            }
+            route(OutfitWithClothes.path)
+            {
+                get("/random-outfit"){
+                    val randomOutfitObj = outfitService.generateRandomOutfit()
+                    call.respond(randomOutfitObj)
+                }
+            }
             route(ClothingListItem.path) {
                 get {
                     call.respond(clothingList)
@@ -49,6 +66,7 @@ fun main() {
                     this::class.java.classLoader.getResource("index.html")!!.readText(),
                     ContentType.Text.Html
                 )
+
             }
             static("/") {
                 resources("")

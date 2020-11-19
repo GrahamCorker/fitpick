@@ -8,6 +8,7 @@ plugins {
     kotlin("multiplatform") version "1.4.0"
     application //to run JVM part
     kotlin("plugin.serialization") version "1.4.0"
+    id("org.flywaydb.flyway") version "7.2.0"
 }
 
 group = "org.example"
@@ -29,6 +30,8 @@ kotlin {
             binaries.executable()
         }
     }
+
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -52,6 +55,10 @@ kotlin {
                 implementation("ch.qos.logback:logback-classic:1.2.3")
                 implementation("io.ktor:ktor-websockets:$ktorVersion")
                 implementation("org.litote.kmongo:kmongo-coroutine-serialization:4.1.1")
+                implementation("org.jetbrains.exposed:exposed:0.12.1")
+                implementation("com.zaxxer:HikariCP:2.7.8")
+                implementation("org.postgresql:postgresql:42.2.2")
+                implementation("org.flywaydb:flyway-core:7.2.0")
             }
         }
 

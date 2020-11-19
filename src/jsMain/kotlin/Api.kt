@@ -12,8 +12,8 @@ val jsonClient = HttpClient {
     install(JsonFeature) { serializer = KotlinxSerializer() }
 }
 
-suspend fun getClothingList(): List<ClothingListItem> {
-    return jsonClient.get(endpoint + ClothingListItem.path)
+suspend fun getClothingList(): List<ClothingItem> {
+    return jsonClient.get(endpoint + ClothingItem.path + "/all")
 }
 
 suspend fun  addClothingListItem(clothingListItem: ClothingListItem) {
