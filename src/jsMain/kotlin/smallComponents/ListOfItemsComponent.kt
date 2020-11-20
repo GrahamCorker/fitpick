@@ -1,7 +1,7 @@
 package smallComponents
 
 import ClothingItem
-import ClothingList
+import bigComponents.ClothingList
 import react.*
 import react.dom.*
 import kotlinx.css.*
@@ -9,7 +9,6 @@ import styled.*
 
 external interface ItemProps : RProps {
     var item:ClothingItem
-
 }
 
 val ListOfItems = functionalComponent<ItemProps> { props ->

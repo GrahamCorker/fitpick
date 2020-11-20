@@ -1,3 +1,7 @@
+package bigComponents
+
+import ClothingItem
+import getClothingList
 import react.*
 import kotlinext.js.*
 import kotlinx.coroutines.MainScope
@@ -41,7 +45,4 @@ val Top10Page = functionalComponent<RProps> { _ ->
             )
         }
     }
-
-
-
 }
