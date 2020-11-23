@@ -111,35 +111,35 @@ val SignupPage = functionalComponent<RProps> { _ ->
                     margin(vertical = 20.px)
                 }
 
-                styledP{
-                    css {
-                        color = Color.white
-                        width = 15.pct
-                        margin(vertical = LinearDimension.auto)
-                    }
-                    +"Size: "
-                }
-
-                styledSelect {
-                    css {
-                        cursor = Cursor.pointer
-                        width = 30.pct
-                        height = 36.px
-                        margin(horizontal = 10.px)
-                    }
-                    attrs.onChangeFunction = {
-                        val target = it.target as HTMLSelectElement
-                        setSize(target.value)
-                    }
-                    option {
-                        attrs.value = "Adult"
-                        +"Adult"
-                    }
-                    option {
-                        attrs.value = "Kids"
-                        +"Kids"
-                    }
-                }
+//                styledP{
+//                    css {
+//                        color = Color.white
+//                        width = 15.pct
+//                        margin(vertical = LinearDimension.auto)
+//                    }
+//                    +"Size: "
+//                }
+//
+//                styledSelect {
+//                    css {
+//                        cursor = Cursor.pointer
+//                        width = 30.pct
+//                        height = 36.px
+//                        margin(horizontal = 10.px)
+//                    }
+//                    attrs.onChangeFunction = {
+//                        val target = it.target as HTMLSelectElement
+//                        setSize(target.value)
+//                    }
+//                    option {
+//                        attrs.value = "Adult"
+//                        +"Adult"
+//                    }
+//                    option {
+//                        attrs.value = "Kids"
+//                        +"Kids"
+//                    }
+//                }
 
                 styledP{
                     css {
@@ -153,7 +153,7 @@ val SignupPage = functionalComponent<RProps> { _ ->
                 styledSelect {
                     css {
                         cursor = Cursor.pointer
-                        width = 30.pct
+                        width = 85.pct
                         height = 36.px
                         margin(left = 10.px)
                     }
@@ -220,9 +220,14 @@ val SignupPage = functionalComponent<RProps> { _ ->
                     }
                     +"Sign up"
                     attrs.onClickFunction = {
-                        //Thing to do now
+
                     }
                 }
+            }
+
+            p{
+                +"Entered Zipcode: "
+                +zipcode
             }
         }
     }
@@ -252,10 +257,7 @@ val SignupPage = functionalComponent<RProps> { _ ->
 //        +"Entered Email: "
 //        +email
 //    }
-//    p{
-//        +"Entered Zipcode: "
-//        +zipcode
-//    }
+
 //    p{
 //        +"Entered Size: "
 //        +size

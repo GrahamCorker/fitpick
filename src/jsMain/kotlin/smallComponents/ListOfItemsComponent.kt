@@ -5,6 +5,7 @@ import bigComponents.ClothingList
 import react.*
 import react.dom.*
 import kotlinx.css.*
+import kotlinx.html.js.onClickFunction
 import styled.*
 
 external interface ItemProps : RProps {
@@ -14,24 +15,38 @@ external interface ItemProps : RProps {
 val ListOfItems = functionalComponent<ItemProps> { props ->
     styledDiv{
         css {
-            margin(horizontal = 12.px, vertical = 6.px)
             textAlign = TextAlign.center
-            width = 200.px
+            alignItems = Align.center
             borderStyle = BorderStyle.solid
-            borderWidth = 2.px
+            borderWidth = 3.px
+            backgroundColor = Color.white
+            height = 100.pct
+            overflow = Overflow.auto
+        }
+
+        styledDiv {
+            css {
+                width =  LinearDimension.auto;
+                marginTop = 30.px
+            }
+            styledH2 {
+                css {
+                    padding(horizontal = 5.px)
+                }
+                +props.item.title
+            }
         }
 
         styledH3 {
-            +props.item.title
-        }
-
-        p {
-            +"Price: $${props.item.price}"
+            css {
+                color = Color.blue
+            }
+            +"$${props.item.price}"
         }
 
         a {
             attrs.href = props.item.siteLink
-            +"Site link"
+            +"Shop Online"
         }
 
         //Added this to create \n between the link and the picture. For some reason it puts them on the same line
@@ -40,10 +55,8 @@ val ListOfItems = functionalComponent<ItemProps> { props ->
 
         styledImg {
             css{
-                height = LinearDimension.auto
-                width = LinearDimension.auto
-                maxHeight = 200.px
-                maxWidth = 200.px
+                maxWidth = 95.pct
+                maxHeight = 95.pct
             }
             attrs {
                 src = props.item.img
