@@ -1,13 +1,17 @@
 package routings
 
+import Account
+import Login
 import bigComponents.LoginPage
 import bigComponents.SignupPage
+import getUser
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.css.*
 import kotlinx.css.properties.TextDecoration
-import react.RProps
-import react.child
+import login
+import react.*
 import react.dom.div
-import react.functionalComponent
 import react.router.dom.browserRouter
 import react.router.dom.route
 import react.router.dom.routeLink
@@ -16,7 +20,14 @@ import styled.css
 import styled.styledButton
 import styled.styledDiv
 
+
+private val scope = MainScope()
 val LoginAndSignupRoutes = functionalComponent<RProps> { _ ->
+    useEffect(dependencies = listOf()) {
+        scope.launch {
+            login(Login("user1@gmail.com", "12345"))
+        }
+    }
     browserRouter {
         styledDiv {
             css {

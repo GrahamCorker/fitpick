@@ -1,0 +1,10 @@
+GET http://localhost:9090/user
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidXNlcjFAZ21haWwuY29tIiwiZXhwIjoxNjA2MDI5Nzk3fQ.1_3eglvMSwoXlWiVGgccrAJbAvWG1zRr9mEVU03xpQI
+
+{
+"email": "user1@gmail.com",
+"password": "12345",
+}
+
+###

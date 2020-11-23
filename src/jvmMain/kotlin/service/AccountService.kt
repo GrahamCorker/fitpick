@@ -3,14 +3,15 @@ package service
 import models.Accounts
 import Account
 import DatabaseFactory.dbQuery
+import models.FullAccount
 import org.jetbrains.exposed.sql.*
 
 
 class AccountService {
 
     //Converts result rows returned by the query into the Account data class
-    private fun toAccount(row: ResultRow): Account =
-            Account(
+    private fun toFullAccount(row: ResultRow): FullAccount =
+            FullAccount(
                     userId = row[Accounts.userId],
                     gender = row[Accounts.gender],
                     zipcode = row[Accounts.zipcode],
@@ -19,18 +20,27 @@ class AccountService {
                     password = row[Accounts.password]
             )
 
-    suspend fun getAllAccounts(): List<Account> = dbQuery {
-        Accounts.selectAll().map{toAccount(it)}
+    fun toSerializableAccount(account: FullAccount) : Account =
+        Account(
+            userId = account.userId,
+            gender = account.gender,
+            zipcode = account.zipcode,
+            username = account.username,
+            email = account.email
+        )
+
+    suspend fun getAllAccounts(): List<FullAccount> = dbQuery {
+        Accounts.selectAll().map{toFullAccount(it)}
     }
 
-    suspend fun getAccountByEmail(email: String): Account? = dbQuery {
+    suspend fun getAccountByEmail(email: String): FullAccount? = dbQuery {
         Accounts.select{
             (Accounts.email eq email)
-        }.mapNotNull { toAccount(it) }.singleOrNull()
+        }.mapNotNull { toFullAccount(it) }.singleOrNull()
     }
 
     //Use BCrypt to encrypt passwords?
-    suspend fun createAccount(account: Account) = dbQuery {
+    suspend fun createAccount(account: FullAccount) = dbQuery {
         Accounts.insert{
             it[Accounts.gender] = account.gender;
             it[Accounts.email] = account.email;
@@ -40,13 +50,13 @@ class AccountService {
         }
     }
 
-    suspend fun getAccountById(id: Int): Account? = dbQuery {
+    suspend fun getAccountById(id: Int): FullAccount? = dbQuery {
         Accounts.select{
             (Accounts.userId eq id)
-        }.mapNotNull {toAccount(it)}.singleOrNull()
+        }.mapNotNull {toFullAccount(it)}.singleOrNull()
     }
 
-    suspend fun updateAccount(account: Account) = dbQuery {
+    suspend fun updateAccount(account: FullAccount) = dbQuery {
         Accounts.update ({ Accounts.userId eq account.userId}){
             it[Accounts.gender] = account.gender;
             it[Accounts.email] = account.email;
@@ -55,7 +65,4 @@ class AccountService {
             it[Accounts.zipcode] = account.zipcode;
         }
     }
-
-
-
 }

@@ -1,4 +1,5 @@
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -9,6 +10,7 @@ import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import service.*
+import io.ktor.auth.jwt.jwt
 
 val clothingList = mutableListOf(
     ClothingListItem("Shirt", 1),
@@ -17,6 +19,7 @@ val clothingList = mutableListOf(
 )
 
 fun main() {
+    val accountService = AccountService()
     embeddedServer(Netty, 9090) {
         install(ContentNegotiation) {
             json()
@@ -30,10 +33,40 @@ fun main() {
         install(Compression) {
             gzip()
         }
+        install(Authentication) {
+            jwt {
+                verifier(SimpleJWT.jwt.verifier)
+                validate {
+                    UserIdPrincipal(it.payload.getClaim("name").asString())
+                }
+            }
+        }
 
         DatabaseFactory.init()
 
         routing {
+            post(Login.path) {
+                val post = call.receive<Login>()
+                val user = accountService.getAccountByEmail(post.email)
+                if (user == null || post.password != user.password) {
+                    error("Invalid Credentials")
+                }
+                val token = mapOf("token" to SimpleJWT.jwt.sign(user.email))
+                println(token)
+                call.respond(token)
+            }
+            post(Signup.path) {
+                val post = call.receive<Signup>()
+                val user = accountService.getAccountByEmail(post.email)
+            }
+            authenticate {
+                get("/user") {
+                    val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                    val userEmail = principal.name
+                    val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                    call.respond(accountService.toSerializableAccount(user))
+                }
+            }
             route(ClothingItem.path) {
                 get("/all"){
                     val clothingList = clothingService.getAllClothingItems()
