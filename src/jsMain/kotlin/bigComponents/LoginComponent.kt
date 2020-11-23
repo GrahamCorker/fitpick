@@ -25,7 +25,7 @@ import styled.styledImg
 
 private val scope = MainScope()
 val LoginPage = functionalComponent<RProps> { _ ->
-    val (username, setUsername) = useState("")
+    val (email, setEmail) = useState("")
     val (password, setPassword) = useState("")
 
     styledDiv {
@@ -59,10 +59,10 @@ val LoginPage = functionalComponent<RProps> { _ ->
                         InputComponent,
                         props = jsObject {
                             onChange = { input ->
-                                setUsername(input)
+                                setEmail(input)
                             }
                             type = InputType.text
-                            placeholder = "Username"
+                            placeholder = "Email"
                         }
                 )
             }
@@ -112,7 +112,7 @@ val LoginPage = functionalComponent<RProps> { _ ->
                     attrs.onClickFunction = {
                         //TODO do this idiomatically
                         scope.launch {
-                            login(Login(username, password))
+                            login(Login(email, password))
                             if (localStorage.getItem("token") != null) {
                                 render(document.getElementById("root")) {
                                     child(MainPageRoutes)
