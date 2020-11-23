@@ -1,5 +1,6 @@
 package models
 
+import org.jetbrains.exposed.dao.IntIdTable
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
 import java.math.BigDecimal

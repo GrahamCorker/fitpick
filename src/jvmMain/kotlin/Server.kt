@@ -74,13 +74,44 @@ fun main() {
                     call.respond(clothingList)
                 }
             }
-            route(OutfitWithClothes.path)
-            {
-                get("/random-outfit"){
-                    val randomOutfitObj = outfitService.generateRandomOutfit()
-                    call.respond(randomOutfitObj)
+
+
+            authenticate {
+                route(OutfitWithClothes.path)
+                {
+                    get("/random-outfit"){
+                        val randomOutfitObj = outfitService.generateRandomOutfit()
+                        call.respond(randomOutfitObj)
+                    }
+
+                    get("/bookmarks"){
+                        val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                        val userEmail = principal.name
+                        val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                        val fullUser = accountService.toSerializableAccount(user);
+                        val outfitBookmarks = bookmarkService.getBookmarkedOutfits(fullUser.userId);
+                        call.respond(outfitBookmarks);
+                    }
+
+                    post("/bookmark-outfit"){
+                        val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                        val userEmail = principal.name
+                        val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                        val fullUser = accountService.toSerializableAccount(user);
+                        val receivedOutfit = call.receive<OutfitWithClothes>();
+                        bookmarkService.createAndBookmarkOutfit(receivedOutfit, fullUser.userId);
+                        call.respond(HttpStatusCode.OK);
+                    }
+
+                    delete("/delete-outfit/{id}")
+                    {
+                        val id = call.parameters["id"]?.toInt() ?: error("Invalid delete request")
+                        bookmarkService.deleteOutfitBookmark(id);
+                        call.respond(HttpStatusCode.OK);
+                    }
                 }
             }
+
             route(ClothingListItem.path) {
                 get {
                     call.respond(clothingList)
@@ -100,8 +131,9 @@ fun main() {
                     this::class.java.classLoader.getResource("index.html")!!.readText(),
                     ContentType.Text.Html
                 )
-
             }
+
+
             static("/") {
                 resources("")
             }

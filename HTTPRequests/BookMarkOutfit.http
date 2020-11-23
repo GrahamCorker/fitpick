@@ -1,0 +1,60 @@
+POST http://localhost:9090/outfit/bookmark-outfit
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidXNlcjFAZ21haWwuY29tIiwiZXhwIjoxNjA2MTY3MDE5fQ.PpDi7cCeb6VvWHpI2gU3bmciNI8dYFtz1btEcrwteh0
+
+
+{
+  "outfitId": 0,
+  "headWear": {
+    "cid": 16,
+    "price": 17.99,
+    "siteLink": "https://www.target.com/p/men-s-slim-band-panama-fedora-hat-goodfellow-co-navy/-/A-79708809?preselect=79630805#lnk=sametab",
+    "isAdult": true,
+    "genderPref": "male",
+    "title": "Mens Slim Band Panama Fedora Hat",
+    "img": "https://target.scene7.com/is/image/Target/GUEST_94580077-8434-4159-af06-317fa803af80?fmt=webp&wid=1400&qlt=80",
+    "itemType": "headwear"
+  },
+  "lowerSection": {
+    "cid": 38,
+    "price": 14.0,
+    "siteLink": "https://www.target.com/p/boys-geometric-ombre-performance-shorts-all-in-motion/-/A-78791443?preselect=78374858#lnk=sametab",
+    "isAdult": false,
+    "genderPref": "male",
+    "title": "Boys Geometric Ombre Performance Shorts",
+    "img": "https://target.scene7.com/is/image/Target/GUEST_b8c7d5fd-034d-4ca6-9f90-112631388664?fmt=webp&wid=1400&qlt=80",
+    "itemType": "lowerSection"
+  },
+  "midSection": {
+    "cid": 51,
+    "price": 12.99,
+    "siteLink": "https://www.target.com/p/women-s-jurassic-park-short-sleeve-graphic-t-shirt-black/-/A-80379094?preselect=79761115#lnk=sametab",
+    "isAdult": true,
+    "genderPref": "female",
+    "title": "Jurassic Park Short Sleeve Graphic T-Shirt",
+    "img": "https://target.scene7.com/is/image/Target/GUEST_cce041cf-a611-4bab-b02a-21ec7478370b?fmt=webp&wid=1400&qlt=80",
+    "itemType": "midSection"
+  },
+  "footWear": {
+    "cid": 73,
+    "price": 34.99,
+    "siteLink": "https://www.target.com/p/boys-s-sport-by-skechers-jaycob-performance-light-up-slip-on-athletic-shoes/-/A-79553990?preselect=79385850#lnk=sametab",
+    "isAdult": false,
+    "genderPref": "male",
+    "title": "Boys S Sport by Skechers Jaycob Performance Light Up Slip-On Athletic Shoes",
+    "img": "https://target.scene7.com/is/image/Target/GUEST_7e35dd08-0f99-4164-8c88-8fd7aed9dd9d?fmt=webp&wid=1400&qlt=80",
+    "itemType": "footwear"
+  },
+  "accessory": {
+    "cid": 97,
+    "price": 5.99,
+    "siteLink": "https://www.target.com/p/boys-39-minecraft-game-over-gloves-green/-/A-79635479#lnk=sametab",
+    "isAdult": false,
+    "genderPref": "unisex",
+    "title": "Minecraft Game Over Gloves - Green",
+    "img": "https://target.scene7.com/is/image/Target/GUEST_0b5fc79f-7d2d-4226-9037-3f5c54911c4b?fmt=webp&wid=1400&qlt=80",
+    "itemType": "accessory"
+  }
+}
+
+###

@@ -1,8 +1,6 @@
 package models
 
 import org.jetbrains.exposed.sql.Column
-import org.jetbrains.exposed.sql.Date
-import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
 import org.joda.time.DateTime
 

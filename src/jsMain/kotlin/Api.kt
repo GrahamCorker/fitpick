@@ -59,3 +59,29 @@ suspend fun  addClothingListItem(clothingListItem: ClothingListItem) {
 suspend fun deleteClothingListItem(clothingListItem: ClothingListItem) {
     jsonClient.delete<Unit>(endpoint + ClothingListItem.path + "/${clothingListItem.id}")
 }
+
+suspend fun bookmarkRandomizedOutfit(outfit: OutfitWithClothes) {
+    jsonClient.post<Unit>(endpoint + OutfitWithClothes.path + "/bookmark-outfit") {
+        contentType(ContentType.Application.Json)
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+        body = outfit
+    }
+}
+
+suspend fun getAllOutfitBookmarks(): List<OutfitWithClothes> {
+    return jsonClient.get(endpoint + OutfitWithClothes.path + "/bookmarks") {
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+    }
+}
+
+suspend fun getRandomizedOutfit(): OutfitWithClothes {
+    return jsonClient.get(endpoint + OutfitWithClothes.path + "/random-outfit") {
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+    }
+}
+
+suspend fun deleteOutfitBookmark(outfit: OutfitWithClothes) {
+    jsonClient.delete<Unit>(endpoint + OutfitWithClothes.path + "/delete-outfit/${outfit.outfitId}"){
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+    }
+}

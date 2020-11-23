@@ -1,0 +1,3 @@
+DELETE http://localhost:9090/outfit/delete-outfit/5
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidXNlcjFAZ21haWwuY29tIiwiZXhwIjoxNjA2MTY3MDE5fQ.PpDi7cCeb6VvWHpI2gU3bmciNI8dYFtz1btEcrwteh0
