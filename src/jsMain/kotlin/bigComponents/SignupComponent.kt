@@ -1,30 +1,34 @@
 package bigComponents
 
+import Signup
+import io.ktor.client.features.*
 import react.*
 import react.dom.*
 import kotlinext.js.*
 import kotlinx.browser.document
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.html.js.*
 import kotlinx.css.*
 import kotlinx.css.properties.TextDecoration
 import kotlinx.css.properties.s
 import kotlinx.css.properties.transition
 import kotlinx.html.InputType
-import org.w3c.dom.HTMLInputElement
 import smallComponents.InputComponent
 import styled.*
 import org.w3c.dom.HTMLSelectElement
+import routings.LoginAndSignupRoutes
+import signUp
 
-//Do we need this line below?
-//private val scope = MainScope()
-
+private val scope = MainScope()
 val SignupPage = functionalComponent<RProps> { _ ->
     val (username, setUsername) = useState("test")
     val (password, setPassword) = useState("")
     val (email, setEmail) = useState("")
     val (zipcode, setZipcode) = useState("")
-    val (size, setSize) = useState("")
-    val (gender, setGender) = useState("")
+//    val (size, setSize) = useState("")
+    val (gender, setGender) = useState("Female")
+    val (hasSubmitted, setHasSubmitted) = useState(false)
 
 
     styledDiv {
@@ -45,7 +49,7 @@ val SignupPage = functionalComponent<RProps> { _ ->
 
             styledImg {
                 css {
-                    margin(top = 50.pct)
+                    margin(top = 30.pct)
                 }
                 attrs.src = "Grey_Login_Icon.png"
             }
@@ -59,7 +63,7 @@ val SignupPage = functionalComponent<RProps> { _ ->
                     InputComponent,
                     props = jsObject {
                         onChange = { input ->
-                            setUsername(input)
+                            setEmail(input)
                         }
                         type = InputType.email
                         placeholder = "Email"
@@ -110,36 +114,6 @@ val SignupPage = functionalComponent<RProps> { _ ->
                     maxHeight = 36.px
                     margin(vertical = 20.px)
                 }
-
-//                styledP{
-//                    css {
-//                        color = Color.white
-//                        width = 15.pct
-//                        margin(vertical = LinearDimension.auto)
-//                    }
-//                    +"Size: "
-//                }
-//
-//                styledSelect {
-//                    css {
-//                        cursor = Cursor.pointer
-//                        width = 30.pct
-//                        height = 36.px
-//                        margin(horizontal = 10.px)
-//                    }
-//                    attrs.onChangeFunction = {
-//                        val target = it.target as HTMLSelectElement
-//                        setSize(target.value)
-//                    }
-//                    option {
-//                        attrs.value = "Adult"
-//                        +"Adult"
-//                    }
-//                    option {
-//                        attrs.value = "Kids"
-//                        +"Kids"
-//                    }
-//                }
 
                 styledP{
                     css {
@@ -220,19 +194,59 @@ val SignupPage = functionalComponent<RProps> { _ ->
                     }
                     +"Sign up"
                     attrs.onClickFunction = {
-
+                        scope.launch {
+                            try {
+                                signUp(Signup(email, username, password, zipcode.toInt(), gender))
+                                setHasSubmitted(true)
+                            }catch(e: ServerResponseException) {
+                                //show error message here Shiv
+                            }
+                        }
                     }
                 }
             }
 
-            p{
-                +"Entered Zipcode: "
-                +zipcode
+            styledP{
+                css {
+                    color = Color.white
+                }
+                if(hasSubmitted) {
+                    +"Congrats on signing up!  Please return to the login page to login."
+                }
             }
         }
     }
 }
 
+//                styledP{
+//                    css {
+//                        color = Color.white
+//                        width = 15.pct
+//                        margin(vertical = LinearDimension.auto)
+//                    }
+//                    +"Size: "
+//                }
+//
+//                styledSelect {
+//                    css {
+//                        cursor = Cursor.pointer
+//                        width = 30.pct
+//                        height = 36.px
+//                        margin(horizontal = 10.px)
+//                    }
+//                    attrs.onChangeFunction = {
+//                        val target = it.target as HTMLSelectElement
+//                        setSize(target.value)
+//                    }
+//                    option {
+//                        attrs.value = "Adult"
+//                        +"Adult"
+//                    }
+//                    option {
+//                        attrs.value = "Kids"
+//                        +"Kids"
+//                    }
+//                }
 
 //        styledDiv {
 //            css {

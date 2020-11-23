@@ -3,6 +3,7 @@ package service
 import models.Accounts
 import Account
 import DatabaseFactory.dbQuery
+import Signup
 import models.FullAccount
 import org.jetbrains.exposed.sql.*
 
@@ -40,8 +41,8 @@ class AccountService {
     }
 
     //Use BCrypt to encrypt passwords?
-    suspend fun createAccount(account: FullAccount) = dbQuery {
-        Accounts.insert{
+    suspend fun createAccount(account: Signup) = dbQuery {
+        val acc = Accounts.insert{
             it[Accounts.gender] = account.gender;
             it[Accounts.email] = account.email;
             it[Accounts.password] = account.password;

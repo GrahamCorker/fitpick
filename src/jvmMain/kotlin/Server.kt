@@ -56,8 +56,9 @@ fun main() {
                 call.respond(token)
             }
             post(Signup.path) {
-                val post = call.receive<Signup>()
-                val user = accountService.getAccountByEmail(post.email)
+                    val post = call.receive<Signup>()
+                    val user = accountService.createAccount(post)
+                    call.respond(HttpStatusCode.OK)
             }
             authenticate {
                 get("/user") {

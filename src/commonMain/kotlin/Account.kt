@@ -23,6 +23,7 @@ data class Login(val email: String, val password: String) {
 @Serializable
 data class Signup(
     val email: String,
+    val username: String,
     val password: String,
     val zipcode: Int,
     val gender: String

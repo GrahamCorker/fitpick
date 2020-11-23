@@ -2,6 +2,7 @@ package routings
 
 import Account
 import Login
+import Signup
 import bigComponents.LoginPage
 import bigComponents.SignupPage
 import getUser
@@ -16,18 +17,12 @@ import react.router.dom.browserRouter
 import react.router.dom.route
 import react.router.dom.routeLink
 import react.router.dom.switch
+import signUp
 import styled.css
 import styled.styledButton
 import styled.styledDiv
 
-
-private val scope = MainScope()
 val LoginAndSignupRoutes = functionalComponent<RProps> { _ ->
-    useEffect(dependencies = listOf()) {
-        scope.launch {
-            login(Login("user1@gmail.com", "12345"))
-        }
-    }
     browserRouter {
         styledDiv {
             css {

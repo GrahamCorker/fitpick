@@ -1,15 +1,20 @@
 package bigComponents
 
+import Login
 import react.*
 import react.dom.*
 import kotlinext.js.*
 import kotlinx.browser.document
+import kotlinx.browser.localStorage
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.css.*
 import kotlinx.css.properties.TextDecoration
 import kotlinx.css.properties.s
 import kotlinx.css.properties.transition
 import kotlinx.html.InputType
 import kotlinx.html.js.onClickFunction
+import login
 import routings.MainPageRoutes
 import smallComponents.InputComponent
 import styled.css
@@ -18,8 +23,7 @@ import styled.styledDiv
 import styled.styledImg
 
 
-//Do we need this line below?
-//private val scope = MainScope()
+private val scope = MainScope()
 val LoginPage = functionalComponent<RProps> { _ ->
     val (username, setUsername) = useState("")
     val (password, setPassword) = useState("")
@@ -42,7 +46,7 @@ val LoginPage = functionalComponent<RProps> { _ ->
 
             styledImg {
                 css {
-                    margin(top = 50.pct)
+                    margin(top = 40.pct)
                 }
                 attrs.src = "Grey_Login_Icon.png"
             }
@@ -107,8 +111,15 @@ val LoginPage = functionalComponent<RProps> { _ ->
                     +"Login"
                     attrs.onClickFunction = {
                         //TODO do this idiomatically
-                        render(document.getElementById("root")) {
-                            child(MainPageRoutes)
+                        scope.launch {
+                            login(Login(username, password))
+                            if (localStorage.getItem("token") != null) {
+                                render(document.getElementById("root")) {
+                                    child(MainPageRoutes)
+                                }
+                            } else {
+                                //Hey Shiv, can you render an error message here?
+                            }
                         }
                     }
                 }

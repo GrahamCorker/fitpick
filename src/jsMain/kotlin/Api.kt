@@ -32,6 +32,13 @@ suspend fun login(login: Login) {
     }
 }
 
+suspend fun signUp(user: Signup) {
+    jsonClient.post<Unit>(endpoint + Signup.path) {
+        contentType(ContentType.Application.Json)
+        body = user
+    }
+}
+
 suspend fun getUser(): Account {
     return jsonClient.get("$endpoint/user") {
         header("Authorization", "Bearer ${localStorage.getItem("token")}")
