@@ -1,11 +1,9 @@
 package smallComponents
 
 import ClothingItem
-import bigComponents.ClothingList
 import react.*
 import react.dom.*
 import kotlinx.css.*
-import kotlinx.html.js.onClickFunction
 import styled.*
 
 external interface ItemProps : RProps {
