@@ -207,6 +207,7 @@ INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType)
 INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(42.00, 'https://www.target.com/p/meri-meri-knitted-shark-scarf-scarves-christmas-1ct/-/A-78693991#lnk=sametab', false, 'unisex', 'Meri Meri - Knitted Shark Scarf', 'https://target.scene7.com/is/image/Target/GUEST_06a05a4e-041d-400f-8141-494a83752342?fmt=webp&wid=1400&qlt=80', 'accessory');
 
 
+INSERT INTO accounts(gender, zipcode, username, email, password) VALUES('male', 12345, 'test', 'z', 'z');
 
 INSERT INTO accounts(gender, zipcode, username, email, password) VALUES('male', 12345, 'user1', 'user1@gmail.com', '12345');
 

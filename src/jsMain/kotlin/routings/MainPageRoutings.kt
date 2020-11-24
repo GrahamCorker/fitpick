@@ -1,7 +1,7 @@
 package routings
 
 import bigComponents.BookmarkPage
-import bigComponents.Top10Page
+import bigComponents.HomePage
 import react.*
 import react.dom.*
 import kotlinx.css.*
@@ -58,7 +58,7 @@ val MainPageRoutes = functionalComponent<RProps> { _ ->
             }
             route("/") {
                 div {
-                    child(Top10Page)
+                    child(HomePage)
                 }
             }
         }
