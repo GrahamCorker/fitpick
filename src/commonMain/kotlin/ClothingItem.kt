@@ -5,9 +5,9 @@ data class ClothingItem(
     val cid: Int,
     val price: Double,
     val siteLink: String,
-    val isAdult: Boolean,
+    var isAdult: Boolean,
     val genderPref: String,
-    val title: String,
+    var title: String,
     val img: String,
     val itemType: String
 ){

@@ -10,10 +10,12 @@ import styled.*
 
 external interface ItemProps : RProps {
     var item:ClothingItem
+    var isBookmark: Boolean
 }
 
 val ListOfItems = functionalComponent<ItemProps> { props ->
-    styledDiv{
+    val (bookmarkType, setBookmarkType) = useState(props.isBookmark)
+    styledDiv {
         css {
             textAlign = TextAlign.center
             alignItems = Align.center
@@ -21,20 +23,15 @@ val ListOfItems = functionalComponent<ItemProps> { props ->
             borderWidth = 3.px
             backgroundColor = Color.white
             height = 100.pct
-            overflow = Overflow.auto
+            minWidth = 200.px
+            overflowY = Overflow.auto
         }
 
-        styledDiv {
+        styledH2 {
             css {
-                width =  LinearDimension.auto;
-                marginTop = 30.px
+                padding(left = 10.px)
             }
-            styledH2 {
-                css {
-                    padding(horizontal = 5.px)
-                }
-                +props.item.title
-            }
+            +props.item.title
         }
 
         styledH3 {
@@ -50,11 +47,11 @@ val ListOfItems = functionalComponent<ItemProps> { props ->
         }
 
         //Added this to create \n between the link and the picture. For some reason it puts them on the same line
-        p{+""}
+        p { +"" }
 
 
         styledImg {
-            css{
+            css {
                 maxWidth = 95.pct
                 maxHeight = 95.pct
             }
@@ -64,3 +61,4 @@ val ListOfItems = functionalComponent<ItemProps> { props ->
         }
     }
 }
+

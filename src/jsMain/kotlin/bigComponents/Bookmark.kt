@@ -14,12 +14,14 @@ import styled.*
 import smallComponents.ListOfItems
 
 
+var dummyIndex:Int = 0
 private val scope = MainScope()
 val BookmarkPage = functionalComponent<RProps> { _ ->
     var index:Int = 0
     val (category, setcategory) = useState("")
     val (selectitem, setselectitem) = useState<ClothingItem?>(null)
     val (clothingList, setClothingList) = useState(emptyList<ClothingItem>())
+    val (dummyState, setdummyState) = useState(0)
 
     useEffect(dependencies = listOf()) {
         scope.launch {
@@ -269,6 +271,37 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                 borderRightStyle = BorderStyle.solid
                                 cursor = Cursor.pointer
                             }
+                            styledDiv{
+                                if (temp.isAdult){
+                                    styledImg {
+                                        css {
+                                            marginTop = 0.px
+                                            height = 30.px
+                                            cursor = Cursor.pointer
+                                        }
+                                        attrs.src = "Bookmark_Icon.png"
+                                        attrs.onClickFunction = {
+                                            temp.isAdult = false
+                                            dummyIndex += 1
+                                            setdummyState(dummyIndex)
+                                        }
+                                    }
+                                } else {
+                                    styledImg {
+                                        css {
+                                            marginTop = 0.px
+                                            height = 30.px
+                                            cursor = Cursor.pointer
+                                        }
+                                        attrs.src = "Selected_Bookmark_Icon.png"
+                                        attrs.onClickFunction = {
+                                            temp.isAdult = true
+                                            dummyIndex += 1
+                                            setdummyState(dummyIndex)
+                                        }
+                                    }
+                                }
+                            }
                             styledDiv {
                                 css {
                                     display = Display.flex
@@ -323,6 +356,13 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                     )
                 }
             }
+        }
+
+        styledH1{
+            css {
+                display = Display.none
+            }
+            +"$dummyState"
         }
     }
 }
