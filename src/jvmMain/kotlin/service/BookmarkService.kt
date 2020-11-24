@@ -1,14 +1,13 @@
 package service
-import models.Outfit
-import models.OutfitBookmark
 import DatabaseFactory.dbQuery
 import OutfitWithClothes
-import models.OutfitObj
+import ClothingItem
+import models.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.insertAndGetId
-import models.savesOutfit
 
 class BookmarkService {
+
 
     private fun toOutfitBookmark(row: ResultRow): OutfitBookmark =
         OutfitBookmark(
@@ -17,6 +16,49 @@ class BookmarkService {
             createdAt = row[savesOutfit.createdAt]
         )
 
+    private fun toClothingBookmark(row:ResultRow): ClothingBookmark =
+        ClothingBookmark(
+            cid = row[savesClothing.cid],
+            userId = row[savesClothing.userId],
+            createdAt = row[savesClothing.createdAt]
+        )
+
+    suspend fun createClothingBookmark(cid: Int, userId: Int) = dbQuery {
+        savesClothing.insert {
+            it[savesClothing.cid] = cid;
+            it[savesClothing.userId] = userId;
+        }
+    }
+
+    suspend fun getBookmarkedClothingItems(itemType: String, userId:Int): List<ClothingItem?> {
+        val clothingBookmarks = dbQuery {
+            savesClothing.select {
+                (savesClothing.userId eq userId)
+            }.mapNotNull { toClothingBookmark(it) }
+        }
+
+        return clothingBookmarks.mapNotNull{clothingBookmark ->
+            clothingService.getClothingItemByType(itemType, clothingBookmark.cid)
+        }
+    }
+
+    suspend fun getTopTenClothingItems():List<ClothingItem> {
+
+        val mostBookmarked = dbQuery {
+            savesClothing.slice(savesClothing.cid, savesClothing.cid.count()).selectAll()
+                .orderBy(savesClothing.cid.count() to SortOrder.DESC).limit(10)
+                .groupBy (savesClothing.cid).mapNotNull{ it[savesClothing.cid]}
+        }
+
+        return mostBookmarked.map{mostBookmarked->
+            clothingService.getClothingItemById(mostBookmarked)!!
+        }
+
+    }
+
+    suspend fun deleteBookmarkedClothingItem(cid: Int, userId: Int) = dbQuery {
+        savesClothing.deleteWhere { (savesClothing.cid eq cid and (savesClothing.userId eq userId)) }
+    }
 
     suspend fun createAndBookmarkOutfit(outfit: OutfitWithClothes, userId: Int) = dbQuery {
         val id = Outfit.insert{
@@ -31,7 +73,6 @@ class BookmarkService {
             it[savesOutfit.outfitID] = id!!;
             it[savesOutfit.userId] = userId;
         }
-
 
     }
 

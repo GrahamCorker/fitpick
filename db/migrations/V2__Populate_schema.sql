@@ -285,64 +285,163 @@ VALUES (
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 1),
+    (SELECT cid FROM clothing WHERE cid = 15),
     (SELECT userId FROM accounts WHERE userId = 4),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 1),
+    (SELECT cid FROM clothing WHERE cid = 15),
     (SELECT userId FROM accounts WHERE userId = 5),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 1),
+    (SELECT cid FROM clothing WHERE cid = 15),
     (SELECT userId FROM accounts WHERE userId = 6),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 1),
+    (SELECT cid FROM clothing WHERE cid = 15),
     (SELECT userId FROM accounts WHERE userId = 7),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 2),
+    (SELECT cid FROM clothing WHERE cid = 57),
     (SELECT userId FROM accounts WHERE userId = 4),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 2),
+    (SELECT cid FROM clothing WHERE cid = 57),
     (SELECT userId FROM accounts WHERE userId = 5),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 3),
+    (SELECT cid FROM clothing WHERE cid = 63),
     (SELECT userId FROM accounts WHERE userId = 4),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 2),
+    (SELECT cid FROM clothing WHERE cid = 57),
     (SELECT userId FROM accounts WHERE userId = 6),
     now()
 );
 
 INSERT INTO savesClothing(cid, userId, createdAt) 
 VALUES (
-    (SELECT cid FROM clothing WHERE cid = 1),
+    (SELECT cid FROM clothing WHERE cid = 15),
     (SELECT userId FROM accounts WHERE userId = 3),
     now()
 );
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 21),
+    (SELECT userId FROM accounts WHERE userId = 10),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 21),
+    (SELECT userId FROM accounts WHERE userId = 11),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 35),
+    (SELECT userId FROM accounts WHERE userId = 5),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 99),
+    (SELECT userId FROM accounts WHERE userId = 6),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 69),
+    (SELECT userId FROM accounts WHERE userId = 6),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 63),
+    (SELECT userId FROM accounts WHERE userId = 6),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 4),
+    (SELECT userId FROM accounts WHERE userId = 6),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 97),
+    (SELECT userId FROM accounts WHERE userId = 6),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 97),
+    (SELECT userId FROM accounts WHERE userId = 14),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 97),
+    (SELECT userId FROM accounts WHERE userId = 7),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 93),
+    (SELECT userId FROM accounts WHERE userId = 8),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 93),
+    (SELECT userId FROM accounts WHERE userId = 6),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 93),
+    (SELECT userId FROM accounts WHERE userId = 1),
+    now()
+);
+
+INSERT INTO savesClothing(cid, userId, createdAt)
+VALUES (
+    (SELECT cid FROM clothing WHERE cid = 97),
+    (SELECT userId FROM accounts WHERE userId = 11),
+    now()
+);
+
 

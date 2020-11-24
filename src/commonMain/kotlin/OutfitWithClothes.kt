@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 data class OutfitWithClothes(
     val outfitId: Int,
     val headWear: ClothingItem?,
-    val lowerSection: ClothingItem?,
     val midSection: ClothingItem?,
+    val lowerSection: ClothingItem?,
     val footWear: ClothingItem?,
     val accessory: ClothingItem?
 ){

@@ -68,12 +68,54 @@ fun main() {
                     call.respond(accountService.toSerializableAccount(user))
                 }
             }
-            route(ClothingItem.path) {
-                get("/all"){
-                    val clothingList = clothingService.getAllClothingItems()
-                    call.respond(clothingList)
+
+            authenticate {
+                route(ClothingItem.path) {
+                    get("/all"){
+                        //make this return a list with bookmarks implemented based on userID
+                        val clothingList = clothingService.getAllClothingItems()
+                        call.respond(clothingList)
+                    }
+
+                    get("/top-ten") {
+                        //will also need to take in userId to determine bookmarks
+                        val topten = bookmarkService.getTopTenClothingItems()
+                        call.respond(topten)
+                    }
+
+                    get("/bookmarks/{type}"){
+                        val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                        val userEmail = principal.name
+                        val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                        val fullUser = accountService.toSerializableAccount(user);
+                        val type = call.parameters["type"] ?: error("Invalid GET request")
+                        val bookmarkList = bookmarkService.getBookmarkedClothingItems(type, fullUser.userId)
+                        call.respond(bookmarkList)
+                    }
+
+                    post("/bookmark-item"){
+                        val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                        val userEmail = principal.name
+                        val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                        val fullUser = accountService.toSerializableAccount(user);
+                        val receivedClothingItem = call.receive<ClothingItem>()
+                        bookmarkService.createClothingBookmark(receivedClothingItem.cid, fullUser.userId)
+                        call.respond(HttpStatusCode.OK)
+                    }
+
+                    delete("/delete-item/{cid}") {
+                        val cid = call.parameters["cid"]?.toInt() ?: error("Invalid delete request")
+                        val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                        val userEmail = principal.name
+                        val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                        val fullUser = accountService.toSerializableAccount(user);
+                        bookmarkService.deleteBookmarkedClothingItem(cid, fullUser.userId)
+                        call.respond(HttpStatusCode.OK)
+                    }
+
                 }
             }
+
 
 
             authenticate {

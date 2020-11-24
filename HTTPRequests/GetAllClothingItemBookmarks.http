@@ -1,3 +1,3 @@
-GET http://localhost:9090/outfit/random-outfit
-Content-Type: application/json
+GET http://localhost:9090/clothingItem/bookmarks/accessory
+Accept: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidXNlcjFAZ21haWwuY29tIiwiZXhwIjoxNjA2MTk5NjU5fQ.dyrBqVoeYYNCY92FFXYXf50iXFMNXgpkTQSJ5diMILk

@@ -35,6 +35,12 @@ class ClothingService {
         }.mapNotNull { toClothingItem(it) }.singleOrNull()
     }
 
+    suspend fun getClothingItemByType(itemType: String, cid: Int): ClothingItem? = dbQuery {
+        Clothing.select{
+            (Clothing.cid eq cid and (Clothing.itemType eq itemType))
+        }.mapNotNull { toClothingItem(it) }.singleOrNull()
+    }
+
     //TODO: add optional params isadult, price, and gender
     suspend fun getRandomClothingItem(type: String) : Int? = dbQuery {
         Clothing.slice(Clothing.cid).select {

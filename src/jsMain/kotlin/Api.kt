@@ -46,18 +46,37 @@ suspend fun getUser(): Account {
 }
 
 suspend fun getClothingList(): List<ClothingItem> {
-    return jsonClient.get(endpoint + ClothingItem.path + "/all")
-}
-
-suspend fun  addClothingListItem(clothingListItem: ClothingListItem) {
-    jsonClient.post<Unit>(endpoint + ClothingListItem.path) {
-        contentType(ContentType.Application.Json)
-        body = clothingListItem
+    return jsonClient.get(endpoint + ClothingItem.path + "/all"){
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
     }
 }
 
-suspend fun deleteClothingListItem(clothingListItem: ClothingListItem) {
-    jsonClient.delete<Unit>(endpoint + ClothingListItem.path + "/${clothingListItem.id}")
+suspend fun getTopTenClothingItems(): List<ClothingItem> {
+    return jsonClient.get(endpoint + ClothingItem.path + "/top-ten"){
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+    }
+}
+
+//item type must be EXACTLY as typed:
+// "headwear", "midSection", "lowerSection", "accessory", "footwear"
+suspend fun getAllClothingBookmarks(itemType: String): List<ClothingItem> {
+    return jsonClient.get(endpoint + ClothingItem.path + "/bookmarks/${itemType}"){
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+    }
+}
+
+suspend fun bookmarkClothingItem(clothingItem: ClothingItem) {
+    jsonClient.post<Unit>(endpoint + ClothingItem.path + "/bookmark-item") {
+        contentType(ContentType.Application.Json)
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+        body = clothingItem
+    }
+}
+
+suspend fun deleteClothingItemBookmark(clothingItem: ClothingItem) {
+    jsonClient.delete<Unit>(endpoint + ClothingItem.path + "/delete-item/${clothingItem.cid}"){
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+    }
 }
 
 suspend fun bookmarkRandomizedOutfit(outfit: OutfitWithClothes) {
