@@ -362,6 +362,79 @@ INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType)
 
 
 
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(42.90, 'https://www.hottopic.com/product/hello-kitty-jujube-hk-kimono-brb-micro-backpack/14822402.html#q=sanrio&start=68&sz=60', false, 'female', 'HELLO KITTY JUJUBE HK KIMONO BRB MICRO BACKPACK', 'https://hottopic.scene7.com/is/image/HotTopic/14822401_hi?$pdp_hero_zoom$', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(54.00, 'https://trippnyc.com/product/tp4028-blupld/', true, 'female', 'CLASP PLEATED SKIRT', 'https://trippnyc.com/wp-content/uploads/magictoolbox_cache/8c95d73fec130487c102a73bf1ab42ce/4/5/45309/1200x1200/3428890671/TP4028-BLUPLD_S.jpg', 'lowerSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(60.00, 'https://www.dollskill.com/current-mood-vegan-leather-platform-mary-janes-black.html', true, 'female', 'DAMNATION PLATFORM MARY JANES', 'https://media.dollskill.com/media/haIfhujKjtpJwnRDz45MEzEQsbIjuEaZ-34.jpg', 'footwear');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(60.00, 'https://www.dollskill.com/sugar-thrillz-platform-heels-kitty-collar-black.html', true, 'female', 'FELINE GOOD PLATFORM HEELS', 'https://media.dollskill.com/media/whjEmhCEftdEyAvlhUx2tDbnBMZwZK0u-34.jpg', 'footwear');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(39.00, 'https://www.dollskill.com/lamoda-downtown-hiker-platform-boots.html', true, 'female', 'DOWNTOWN HIKER PLATFORM BOOTS', 'https://media.dollskill.com/media/UJ7dMrDRrnUZmDZuoKrbydKSTeCI5KXj-34.jpg', 'footwear');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(29.00, 'https://www.urbanoutfitters.com/shop/angel-tie-back-long-sleeve-tee?category=womens-tops&color=010&type=REGULAR&quantity=1', true, 'female', 'Angel Tie-Back Long Sleeve Tee', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/59913194_010_b?$xlarge$=&fit=constrain&fmt=webp&qlt=80&wid=400', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(79.00, 'https://www.urbanoutfitters.com/shop/uo-lennon-jacquard-cropped-sweater?category=womens-tops&color=015&type=REGULAR&quantity=1', true, 'female', 'UO Lennon Jacquard Cropped Sweater', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/59007849_015_b?$xlarge$=&fit=constrain&fmt=webp&qlt=80&wid=400', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(30.90, 'https://www.hottopic.com/product/misfits-fiend-skull-long-sleeve-t-shirt/14564574.html?cgid=guys-tops-long-sleeves#start=54', true, 'male', 'MISFITS FIEND SKULL LONG-SLEEVE T-SHIRT', 'https://hottopic.scene7.com/is/image/HotTopic/14564574_hi?$pdp_hero_standard$', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(108.00, 'https://trippnyc.com/product/is103ma-blkwht/', true, 'male', 'SPLIT LEG BONDAGE PANT', 'https://trippnyc.com/wp-content/uploads/magictoolbox_cache/8c95d73fec130487c102a73bf1ab42ce/2/9/29605/thumb600x600/4232147842/IS103M-BLKWHT_F.jpg', 'lowerSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(30.90, 'https://www.hottopic.com/product/good-boys-finish-last-long-sleeve-t-shirt-by-wizard-of-barge/14428633.html?cgid=guys-tops-long-sleeves#start=88&sz=60', true, 'male', 'GOOD BOYS FINISH LAST LONG-SLEEVE T-SHIRT BY WIZARD OF BARGE', 'https://hottopic.scene7.com/is/image/HotTopic/14428633_hi?$pdp_hero_zoom$', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(24.49, 'https://www2.hm.com/en_us/productpage.0806955002.html', true, 'male', 'Faux Shearling Hoodie', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F41%2Fc3%2F41c3d85e0941a8854a2dcaddf5329bd08044a438.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_hoodiessweatshirts_hoodies%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(129.00, 'https://www2.hm.com/en_us/productpage.0908490001.html', true, 'male', 'Faux Shearling-lined Jacket', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F16%2Fa7%2F16a70c8c95802160eb6ac582a10988f68f935c3a.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_jacketscoats_jackets%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/mobilemain]', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(14.99, 'https://www2.hm.com/en_us/productpage.0685813041.html', true, 'male', 'Relaxed Fit Sweatshirt', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F05%2Fb4%2F05b4425b04c6cd0a5308b202533444077cbfb0a3.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_hoodiessweatshirts_sweatshirts%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/mobilemain]', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(69.99, 'https://www2.hm.com/en_us/productpage.0927657001.html', true, 'male', 'Chunky Leather Sneakers', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fae%2Fee%2Faeeedc5294b8b47701feabf2df0abae9cc1ed9b9.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_shoes_sneakers%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]', 'footwear');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(198.00, 'https://www.urbanoutfitters.com/shop/timberland-classic-work-boot?category=mens-clothing&color=016&type=REGULAR&quantity=1', true, 'male', 'Timberland Classic Work Boot', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/26847640_016_b?$xlarge$=&fit=constrain&fmt=webp&qlt=80&wid=683', 'footwear');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(69.00, 'https://www.urbanoutfitters.com/shop/dark-seas-signalman-thermal-long-sleeve-tee?category=mens-clothing&color=041&type=REGULAR&quantity=1', true, 'male', 'Dark Seas Signalman Thermal Long Sleeve Tee', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/58843228_041_b?$xlarge$=&fit=constrain&fmt=webp&qlt=80&wid=683', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(34.00, 'https://www.urbanoutfitters.com/shop/junk-food-bowie-tee?category=mens-clothing&color=001&type=REGULAR&quantity=1', true, 'male', 'Junk Food Bowie Tee', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/59680231_001_b?$xlarge$=&fit=constrain&fmt=webp&qlt=80&wid=683', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(19.99, 'https://www2.hm.com/en_us/productpage.0739239014.html', true, 'male', 'Skinny Fit Suit Pants', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fd0%2F66%2Fd066fd202bed9dff5482b084a4bdc28580d233ec.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_trousers_trousers_skinny_all%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/mobilemain]', 'lowerSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(17.50, 'https://www.pacsun.com/playboy/x-playboy-white-black-repeat-bunny-belt-0637600990005.html?dwvar_0637600990005_color=165&cgid=mens', true, 'male', 'Playboy x Playboy White & Black Repeat Bunny Belt', 'https://www.pacsun.com/dw/image/v2/AAJE_PRD/on/demandware.static/-/Sites-pacsun_storefront_catalog/default/dw7ecb4626/product_images/0637600990005NEW_00_165.jpg?sw=690&sh=1070&sm=fit', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(20.65, 'https://www.pacsun.com/vans/checkerboard-world-long-sleeve-t-shirt-0103037910195.html?dwvar_0103037910195_color=010&cgid=mens-graphic-tees', true, 'male', 'Vans Checkerboard World Long Sleeve T-Shirt', 'https://www.pacsun.com/dw/image/v2/AAJE_PRD/on/demandware.static/-/Sites-pacsun_storefront_catalog/default/dwdd2b3fe1/product_images/0103037910195NEW_00_010.jpg?sw=690&sh=1070&sm=fit', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(9.97, 'https://www.pacsun.com/pacsun/ashes-to-ashes-t-shirt-0120519270089.html?dwvar_0120519270089_color=010&cgid=mens-graphic-tees', true, 'male', 'PacSun Ashes To Ashes T-Shirt', 'https://www.pacsun.com/dw/image/v2/AAJE_PRD/on/demandware.static/-/Sites-pacsun_storefront_catalog/default/dwad92da2e/product_images/0120519270089NEW_00_010.jpg?sw=690&sh=1070&sm=fit', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(41.56, 'https://www.pacsun.com/pacsun/artwork-all-over-hoodie-0193522800048.html?dwvar_0193522800048_color=010&cgid=mens-hoodies-fleece', true, 'male', 'PacSun Artwork All Over Hoodie', 'https://www.pacsun.com/dw/image/v2/AAJE_PRD/on/demandware.static/-/Sites-pacsun_storefront_catalog/default/dwa76fb34a/product_images/0193522800048NEW_00_010.jpg?sw=690&sh=1070&sm=fit', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(26.00, 'https://trippnyc.com/product/is5030-blk/', true, 'unisex', 'PIERCING FACE COVER', 'https://trippnyc.com/wp-content/uploads/2020/10/IS5030_BLK_F.jpg', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(9.09, 'https://www2.hm.com/en_us/productpage.0760876019.html', true, 'unisex', 'Patterned Scarf', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F7e%2F7b%2F7e7bf46d537586e90f152a973605c7459325b042.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_accessories_scarves%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(6.99, 'https://www2.hm.com/en_us/productpage.0822495008.html', true, 'unisex', 'Rib-knit Hat', 'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F81%2Fe1%2F81e1f0e05a01c6480bd3a18d433208d8d60c1806.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_accessories_hatscaps_beanie%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]', 'headwear');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(60.00, 'https://www.pacsun.com/vans/white-old-skool-shoes-0530037910212010.html?dwvar_0530037910212010_color=010&cgid=unisex-all', true, 'unisex', 'Vans White Old Skool Shoes', 'https://www.pacsun.com/dw/image/v2/AAJE_PRD/on/demandware.static/-/Sites-pacsun_storefront_catalog/default/dw0df2e5b6/product_images/0530037910212U_01_010.jpg?sw=690&sh=1070&sm=fit', 'footwear');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(34.96, 'https://www.pacsun.com/pacsun/cable-knit-crew-neck-sweater-0128508520027.html?dwvar_0128508520027_color=279&cgid=unisex-all', true, 'unisex', 'PacSun Cable Knit Crew Neck Sweater', 'https://www.pacsun.com/dw/image/v2/AAJE_PRD/on/demandware.static/-/Sites-pacsun_storefront_catalog/default/dwf031224c/product_images/0128508520027U_00_279.jpg?sw=690&sh=1070&sm=fit', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(6.93, 'https://www.hottopic.com/product/edward-scissorhands-scissors-front-back-earrings/14047706.html#start=1', true, 'unisex', 'EDWARD SCISSORHANDS SCISSORS FRONT/BACK EARRINGS', 'https://hottopic.scene7.com/is/image/HotTopic/14047705_hi?$pdp_hero_zoom$', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(7.63, 'https://www.hottopic.com/product/skull-safety-pin-dice-chain-necklace-set/14248452.html?cgid=accessories-jewelry#start=4', true, 'unisex', 'SKULL SAFETY PIN DICE CHAIN NECKLACE SET', 'https://hottopic.scene7.com/is/image/HotTopic/14248451_hi?$pdp_hero_zoom$', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(4.83, 'https://www.hottopic.com/product/barbed-wire-chain-necklace/12413291.html', true, 'unisex', 'BARBED WIRE CHAIN NECKLACE', 'https://hottopic.scene7.com/is/image/HotTopic/12413290_hi?$pdp_hero_zoom$', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(12.00, 'https://www.urbanoutfitters.com/shop/dyed-face-mask?category=SEARCHRESULTS&color=040&searchparams=q%3Dface%2520mask&type=REGULAR&size=ONE%20SIZE&quantity=1', true, 'unisex', 'Tie-Dye Face Mask', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/57879959_040_b?$xlarge$=&fit=constrain&fmt=webp&qlt=80&wid=683', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(13.00, 'https://www.urbanoutfitters.com/shop/rilakkuma-reusable-face-mask?category=SEARCHRESULTS&color=020&searchparams=q%3Dface%2520mask&type=REGULAR&size=ONE%20SIZE&quantity=1', true, 'unisex', 'Rilakkuma Reusable Face Mask', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/59229518_020_b?$xlarge$=&fit=constrain&fmt=webp&qlt=80&wid=683', 'accessory');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(49.80, 'https://en.mixxmix.com/product/hidelogo-patch-oversized-knit-sweater/55367/category/2839/display/1/', true, 'unisex', 'Logo Patch Oversized Knit Sweater', 'https://akamai.poxo.com/mixxmix/en.mixxmix.com/web/product/big/20191129/c6fe4807c69fd4b0a013e20228ce8bce.gif', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(41.50, 'https://en.mixxmix.com/product/seekstriped-turtleneck-knit-top/50938/category/2839/display/1/', true, 'unisex', 'Striped Turtleneck Knit Top', 'https://akamai.poxo.com/mixxmix/en.mixxmix.com/web/product/big/201712/50938_shop1_410029.jpg', 'midSection');
+
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(70.00, 'https://en.mixxmix.com/product/heart-clubembroidered-logo-drawstring-hoodie/44422/category/2839/display/1/', true, 'unisex', 'Embroidered Logo Drawstring Hoodie', 'https://akamai.poxo.com/mixxmix/en.mixxmix.com/web/product/big/201711/44422_shop1_659811.gif', 'midSection');
+
+
+
+
 INSERT INTO accounts(gender, zipcode, username, email, password) VALUES('male', 12345, 'test', 'z', 'z');
 
 INSERT INTO accounts(gender, zipcode, username, email, password) VALUES('male', 12345, 'user1', 'user1@gmail.com', '12345');
