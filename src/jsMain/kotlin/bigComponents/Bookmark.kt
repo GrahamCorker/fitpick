@@ -18,7 +18,7 @@ var dummyIndex:Int = 0
 private val scope = MainScope()
 val BookmarkPage = functionalComponent<RProps> { _ ->
     var index:Int = 0
-    val (category, setcategory) = useState("")
+    val (category, setcategory) = useState("All")
     val (selectitem, setselectitem) = useState<ClothingItem?>(null)
     val (clothingList, setClothingList) = useState(emptyList<ClothingItem>())
     val (dummyState, setdummyState) = useState(0)
@@ -105,7 +105,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "Midsection") {
+                            if (category != "MidSection") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -124,7 +124,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Midsection"
                         attrs {
                             onClickFunction = {
-                                setcategory("Midsection")
+                                setcategory("MidSection")
                             }
                         }
                     }
@@ -134,7 +134,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "Lowersection") {
+                            if (category != "LowerSection") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -153,7 +153,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Lowersection"
                         attrs {
                             onClickFunction = {
-                                setcategory("Lowersection")
+                                setcategory("LowerSection")
                             }
                         }
                     }
@@ -192,7 +192,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "Accessories") {
+                            if (category != "Accessory") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -211,7 +211,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Accessories"
                         attrs {
                             onClickFunction = {
-                                setcategory("Accessories")
+                                setcategory("Accessory")
                             }
                         }
                     }
@@ -263,81 +263,164 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 }
                 div {
                     clothingList.forEach { temp ->
-                        styledDiv {
-                            css {
-                                display = Display.flex
-                                flexDirection = FlexDirection.row
-                                borderBottomStyle = BorderStyle.solid
-                                borderRightStyle = BorderStyle.solid
-                                cursor = Cursor.pointer
-                            }
-                            styledDiv{
-                                if (temp.isAdult){
-                                    styledImg {
-                                        css {
-                                            marginTop = 0.px
-                                            height = 30.px
-                                            cursor = Cursor.pointer
-                                        }
-                                        attrs.src = "Bookmark_Icon.png"
-                                        attrs.onClickFunction = {
-                                            temp.isAdult = false
-                                            dummyIndex += 1
-                                            setdummyState(dummyIndex)
-                                        }
-                                    }
-                                } else {
-                                    styledImg {
-                                        css {
-                                            marginTop = 0.px
-                                            height = 30.px
-                                            cursor = Cursor.pointer
-                                        }
-                                        attrs.src = "Selected_Bookmark_Icon.png"
-                                        attrs.onClickFunction = {
-                                            temp.isAdult = true
-                                            dummyIndex += 1
-                                            setdummyState(dummyIndex)
-                                        }
-                                    }
-                                }
-                            }
+                        if(category =="All" || category =="Outfit") {
                             styledDiv {
                                 css {
                                     display = Display.flex
                                     flexDirection = FlexDirection.row
-                                    width = 80.pct
+                                    borderBottomStyle = BorderStyle.solid
+                                    borderRightStyle = BorderStyle.solid
+                                    cursor = Cursor.pointer
                                 }
-                                styledH3 {
-                                    css {
-                                        marginLeft = 5.px
-                                        marginRight = 10.px
+                                styledDiv {
+                                    if (temp.isAdult) {
+                                        styledImg {
+                                            css {
+                                                marginTop = 0.px
+                                                height = 30.px
+                                                cursor = Cursor.pointer
+                                            }
+                                            attrs.src = "Bookmark_Icon.png"
+                                            attrs.onClickFunction = {
+                                                temp.isAdult = false
+                                                dummyIndex += 1
+                                                setdummyState(dummyIndex)
+                                            }
+                                        }
+                                    } else {
+                                        styledImg {
+                                            css {
+                                                marginTop = 0.px
+                                                height = 30.px
+                                                cursor = Cursor.pointer
+                                            }
+                                            attrs.src = "Selected_Bookmark_Icon.png"
+                                            attrs.onClickFunction = {
+                                                temp.isAdult = true
+                                                dummyIndex += 1
+                                                setdummyState(dummyIndex)
+                                            }
+                                        }
                                     }
-                                    +"$index. "
                                 }
-                                styledH3 {
-                                    +temp.title
+                                styledDiv {
+                                    css {
+                                        display = Display.flex
+                                        flexDirection = FlexDirection.row
+                                        width = 80.pct
+                                    }
+                                    styledH3 {
+                                        css {
+                                            marginLeft = 5.px
+                                            marginRight = 10.px
+                                        }
+                                        +"$index. "
+                                    }
+                                    styledH3 {
+                                        +temp.title
+                                    }
+                                }
+                                styledDiv {
+                                    css {
+                                        display = Display.flex
+                                        flexDirection = FlexDirection.rowReverse
+                                        width = 20.pct
+                                        marginRight = 5.px
+                                        opacity = 1
+                                    }
+                                    p {
+                                        +"$${temp.price}"
+                                    }
+                                }
+                                attrs {
+                                    onClickFunction = {
+                                        setselectitem(temp)
+                                    }
                                 }
                             }
-                            styledDiv {
-                                css {
-                                    display = Display.flex
-                                    flexDirection = FlexDirection.rowReverse
-                                    width = 20.pct
-                                    marginRight = 5.px
-                                    opacity = 1
+                            index += 1
+                        }
+                        else {
+                            if (temp.itemType
+                                    == (category[0].toLowerCase()
+                                            + category.subSequence(1, category.length).toString())) {
+                                styledDiv {
+                                    css {
+                                        display = Display.flex
+                                        flexDirection = FlexDirection.row
+                                        borderBottomStyle = BorderStyle.solid
+                                        borderRightStyle = BorderStyle.solid
+                                        cursor = Cursor.pointer
+                                    }
+                                    styledDiv {
+                                        if (temp.isAdult) {
+                                            styledImg {
+                                                css {
+                                                    marginTop = 0.px
+                                                    height = 30.px
+                                                    cursor = Cursor.pointer
+                                                }
+                                                attrs.src = "Bookmark_Icon.png"
+                                                attrs.onClickFunction = {
+                                                    temp.isAdult = false
+                                                    dummyIndex += 1
+                                                    setdummyState(dummyIndex)
+                                                }
+                                            }
+                                        } else {
+                                            styledImg {
+                                                css {
+                                                    marginTop = 0.px
+                                                    height = 30.px
+                                                    cursor = Cursor.pointer
+                                                }
+                                                attrs.src = "Selected_Bookmark_Icon.png"
+                                                attrs.onClickFunction = {
+                                                    temp.isAdult = true
+                                                    dummyIndex += 1
+                                                    setdummyState(dummyIndex)
+                                                }
+                                            }
+                                        }
+                                    }
+                                    styledDiv {
+                                        css {
+                                            display = Display.flex
+                                            flexDirection = FlexDirection.row
+                                            width = 80.pct
+                                        }
+                                        styledH3 {
+                                            css {
+                                                marginLeft = 5.px
+                                                marginRight = 10.px
+                                            }
+                                            +"$index. "
+                                        }
+                                        styledH3 {
+                                            +temp.title
+                                        }
+                                    }
+                                    styledDiv {
+                                        css {
+                                            display = Display.flex
+                                            flexDirection = FlexDirection.rowReverse
+                                            width = 20.pct
+                                            marginRight = 5.px
+                                            opacity = 1
+                                        }
+                                        p {
+                                            +"$${temp.price}"
+                                        }
+                                    }
+                                    attrs {
+                                        onClickFunction = {
+                                            setselectitem(temp)
+                                        }
+                                    }
                                 }
-                                p {
-                                    +"$${temp.price}"
-                                }
-                            }
-                            attrs {
-                                onClickFunction = {
-                                    setselectitem(temp)
-                                }
+                                index += 1
                             }
                         }
-                        index += 1
                     }
                 }
             }
