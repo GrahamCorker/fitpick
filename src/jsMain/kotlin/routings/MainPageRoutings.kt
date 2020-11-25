@@ -2,6 +2,7 @@ package routings
 
 import bigComponents.BookmarkPage
 import bigComponents.HomePage
+import bigComponents.TopTen
 import kotlinx.browser.document
 import kotlinx.browser.localStorage
 import react.*
@@ -13,82 +14,151 @@ import react.router.dom.browserRouter
 import react.router.dom.route
 import react.router.dom.routeLink
 import react.router.dom.switch
-import styled.css
-import styled.styledButton
-import styled.styledDiv
-import styled.styledImg
+import styled.*
 
 //private val scope = MainScope()
 
 val MainPageRoutes = functionalComponent<RProps> { _ ->
+    val (currentPage, setCurrentPage) = useState("Home")
+
     browserRouter {
         styledDiv {
             css {
                 display = Display.flex
-                flexWrap = FlexWrap.wrap
-                flexDirection = FlexDirection.rowReverse
+                justifyContent = JustifyContent.spaceBetween
+                padding(5.px)
+                height = 75.px
+            }
 
-            }
-            routeLink("/") {
-                styledImg {
-                    css {
-                        maxHeight = 35.px
-                        maxWidth = 35.px
-                        padding(horizontal = 15.px)
-                    }
-                    attrs {
-                        src = "Home_Icon.png"
-                    }
-                }
-            }
-            routeLink("/settings") {
-                styledImg {
-                    css {
-                        maxHeight = 35.px
-                        maxWidth = 35.px
-                        padding(horizontal = 15.px)
-                    }
-                    attrs {
-                        src = "Gear_Icon.png"
-                    }
-                }
-            }
-            styledButton {
+            styledImg {
                 css {
-                    backgroundColor = Color.white
-                    border = "none"
-                    color = Color.black
-                    padding(10.px, 20.px)
+                    maxHeight = 100.pct
+                }
+                attrs.src = "Dark_Text_FP.png"
+            }
+
+            styledDiv{
+                css{
                     textAlign = TextAlign.center
-                    textDecoration = TextDecoration.none
-                    display = Display.inlineBlock
-                    fontSize = 16.px
-                    fontWeight = FontWeight.bold
-                    margin(4.px, 2.px)
-                    cursor = Cursor.pointer
-                    borderRadius = 16.px
-                    hover {
-                        backgroundColor = Color.red
+                }
+                styledP{
+                    css{
+                        fontFamily = "'Comic Sans MS', cursive, sans-serif"
+                        fontSize = 250.pct
+                        marginTop = 5.px
+                    }
+                    +currentPage
+                }
+            }
+
+            styledDiv {
+                css {
+                    display = Display.flex
+                    flexDirection = FlexDirection.rowReverse
+                    justifyContent = JustifyContent.center
+                    margin(vertical = LinearDimension.auto)
+                }
+
+                styledButton {
+                    css {
+                        backgroundColor = Color.black
+                        border = "none"
                         color = Color.white
+                        padding(10.px, 20.px)
+                        textAlign = TextAlign.center
+                        textDecoration = TextDecoration.none
+                        display = Display.inlineBlock
+                        fontSize = 20.px
+                        fontWeight = FontWeight.bold
+                        margin(horizontal = 10.px)
+                        cursor = Cursor.pointer
+                        borderRadius = 16.px
+                        height = 50.px
+                        hover {
+                            backgroundColor = Color.red
+                            color = Color.white
+                        }
+                    }
+                    +"Logout"
+                    attrs {
+                        onClickFunction = {
+                            render(document.getElementById("root")) {
+                                child(LoginAndSignupRoutes)
+                                localStorage.clear()
+                            }
+                        }
                     }
                 }
-                +"Logout"
-                attrs {
-                    onClickFunction = {
-                        render(document.getElementById("root")) {
-                            child(LoginAndSignupRoutes)
-                            localStorage.clear()
+
+                routeLink("/settings") {
+                    styledImg {
+                        css {
+                            maxHeight = 50.px
+                            padding(horizontal = 15.px)
+                        }
+                        attrs {
+                            src = "Gear_Icon.png"
+                            onClickFunction = { setCurrentPage ("Settings") }
+                        }
+                    }
+                }
+
+                routeLink("/topTen") {
+                    styledImg {
+                        css {
+                            maxHeight = 50.px
+                            padding(horizontal = 15.px)
+                        }
+                        attrs {
+                            src = "Star_Icon.png"
+                            onClickFunction = { setCurrentPage ("Top 10") }
+                        }
+                    }
+                }
+
+                routeLink("/bookmark") {
+                    styledImg {
+                        css {
+                            maxHeight = 50.px
+                            padding(horizontal = 15.px)
+                        }
+                        attrs {
+                            src = "Bookmark_Icon.png"
+                            onClickFunction = { setCurrentPage ("Bookmarks") }
+                        }
+                    }
+                }
+
+                routeLink("/") {
+                    styledImg {
+                        css {
+                            maxHeight = 50.px
+                            padding(horizontal = 15.px)
+                        }
+                        attrs {
+                            src = "Home_Icon.png"
+                            onClickFunction = { setCurrentPage ("Home") }
                         }
                     }
                 }
             }
-
         }
 
         switch {
-            route("/settings") {
+            route("/bookmark") {
                 div {
                     child(BookmarkPage)
+                }
+            }
+            route("/topTen") {
+                div {
+                    child(TopTen)
+                }
+            }
+            route("/settings") {
+                div {
+                    //TODO Add the settings page child here
+                    //child(TopTen)
                 }
             }
             route("/") {
