@@ -1,6 +1,10 @@
 package bigComponents
 
 import ClothingItem
+import OutfitWithClothes
+import bookmarkClothingItem
+import getAllClothingBookmarks
+import getAllOutfitBookmarks
 import getClothingList
 import react.*
 import react.dom.*
@@ -12,22 +16,29 @@ import kotlinx.css.*
 import kotlinx.css.properties.TextDecoration
 import styled.*
 import smallComponents.ListOfItems
+import smallComponents.OutfitCard
+import kotlin.math.round
 
 
 var dummyIndex:Int = 0
 private val scope = MainScope()
 val BookmarkPage = functionalComponent<RProps> { _ ->
-    var index:Int = 0
-    val (category, setcategory) = useState("All")
+    var index:Int = 1
+    val (category, setcategory) = useState("headwear")
+    val (gender, setGender) = useState("all")
     val (selectitem, setselectitem) = useState<ClothingItem?>(null)
     val (clothingList, setClothingList) = useState(emptyList<ClothingItem>())
+    val (outfitList, setOutfitList) = useState(emptyList<OutfitWithClothes>())
+    val (currentOutfit, setCurrentOutfit) = useState<OutfitWithClothes?>(null)
     val (dummyState, setdummyState) = useState(0)
 
     useEffect(dependencies = listOf()) {
         scope.launch {
-            setClothingList(getClothingList())
+            //setClothingList(getClothingList())
+            setClothingList(getAllClothingBookmarks("headwear"))
         }
     }
+
 
     styledDiv {
         css {
@@ -39,16 +50,126 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
             backgroundSize = "cover"
         }
 
-        styledDiv{
-            css{
-                textAlign = TextAlign.center
+        styledDiv {
+            css {
+                display = Display.flex
+                flexDirection = FlexDirection.row
+                width = 40.pct
+                margin(horizontal = LinearDimension.auto)
+                marginTop = 40.px
+                justifyContent = JustifyContent.spaceEvenly
             }
-            styledP{
-                css{
-                    fontFamily = "'Comic Sans MS', cursive, sans-serif"
-                    fontSize = 250.pct
+
+            styledButton {
+                css {
+                    width = 20.pct
+                    height = 60.px
+                    if (gender != "male") {
+                        backgroundColor = Color.white
+                        color = Color.black
+                    } else {
+                        backgroundColor = Color.red
+                        color = Color.white
+                    }
+                    borderStyle = BorderStyle.solid
+                    borderWidth = 3.px
+                    textAlign = TextAlign.center
+                    textDecoration = TextDecoration.none
+                    display = Display.inlineBlock
+                    fontSize = 16.px
+                    fontWeight = FontWeight.bold
+                    cursor = Cursor.pointer
                 }
-                +"Bookmarks"
+                +"Male"
+                attrs {
+                    onClickFunction = {
+                        setGender("male")
+                    }
+                }
+            }
+
+            styledButton {
+                css {
+                    width = 20.pct
+                    height = 60.px
+                    if (gender != "female") {
+                        backgroundColor = Color.white
+                        color = Color.black
+                    } else {
+                        backgroundColor = Color.red
+                        color = Color.white
+                    }
+                    borderStyle = BorderStyle.solid
+                    borderWidth = 3.px
+                    textAlign = TextAlign.center
+                    textDecoration = TextDecoration.none
+                    display = Display.inlineBlock
+                    fontSize = 16.px
+                    fontWeight = FontWeight.bold
+                    cursor = Cursor.pointer
+                }
+                +"Female"
+                attrs {
+                    onClickFunction = {
+                        setGender("female")
+                    }
+                }
+            }
+
+            styledButton {
+                css {
+                    width = 20.pct
+                    height = 60.px
+                    if (gender != "unisex") {
+                        backgroundColor = Color.white
+                        color = Color.black
+                    } else {
+                        backgroundColor = Color.red
+                        color = Color.white
+                    }
+                    borderStyle = BorderStyle.solid
+                    borderWidth = 3.px
+                    textAlign = TextAlign.center
+                    textDecoration = TextDecoration.none
+                    display = Display.inlineBlock
+                    fontSize = 16.px
+                    fontWeight = FontWeight.bold
+                    cursor = Cursor.pointer
+                }
+                +"Unisex"
+                attrs {
+                    onClickFunction = {
+                        setGender("unisex")
+                    }
+                }
+            }
+
+            styledButton {
+                css {
+                    width = 20.pct
+                    height = 60.px
+                    if (gender != "all") {
+                        backgroundColor = Color.white
+                        color = Color.black
+                    } else {
+                        backgroundColor = Color.red
+                        color = Color.white
+                    }
+                    borderStyle = BorderStyle.solid
+                    borderWidth = 3.px
+                    textAlign = TextAlign.center
+                    textDecoration = TextDecoration.none
+                    display = Display.inlineBlock
+                    fontSize = 16.px
+                    fontWeight = FontWeight.bold
+                    cursor = Cursor.pointer
+                }
+                +"All"
+                attrs {
+                    onClickFunction = {
+                        setGender("all")
+                    }
+                }
             }
         }
 
@@ -59,6 +180,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 height = 70.pct
                 minHeight = 500.px
                 maxHeight = 600.px
+                marginTop = 30.px
                 width = 80.pct
                 margin(horizontal = 10.pct)
                 position = Position.fixed
@@ -76,7 +198,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "Headwear") {
+                            if (category != "headwear") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -95,7 +217,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Headwear"
                         attrs {
                             onClickFunction = {
-                                setcategory("Headwear")
+                                scope.launch {
+                                    setClothingList(getAllClothingBookmarks("headwear"))
+                                }
+                                setcategory("headwear")
                             }
                         }
                     }
@@ -105,7 +230,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "MidSection") {
+                            if (category != "midSection") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -124,7 +249,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Midsection"
                         attrs {
                             onClickFunction = {
-                                setcategory("MidSection")
+                                scope.launch {
+                                    setClothingList(getAllClothingBookmarks("midSection"))
+                                }
+                                setcategory("midSection")
                             }
                         }
                     }
@@ -134,7 +262,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "LowerSection") {
+                            if (category != "lowerSection") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -153,7 +281,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Lowersection"
                         attrs {
                             onClickFunction = {
-                                setcategory("LowerSection")
+                                scope.launch {
+                                    setClothingList(getAllClothingBookmarks("lowerSection"))
+                                }
+                                setcategory("lowerSection")
                             }
                         }
                     }
@@ -163,7 +294,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "Footwear") {
+                            if (category != "footwear") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -182,7 +313,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Footwear"
                         attrs {
                             onClickFunction = {
-                                setcategory("Footwear")
+                                scope.launch {
+                                    setClothingList(getAllClothingBookmarks("footwear"))
+                                }
+                                setcategory("footwear")
                             }
                         }
                     }
@@ -192,7 +326,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "Accessory") {
+                            if (category != "accessory") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -211,7 +345,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Accessories"
                         attrs {
                             onClickFunction = {
-                                setcategory("Accessory")
+                                scope.launch {
+                                    setClothingList(getAllClothingBookmarks("accessory"))
+                                }
+                                setcategory("accessory")
                             }
                         }
                     }
@@ -221,7 +358,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "Outfit") {
+                            if (category != "outfit") {
                                 backgroundColor = Color.white
                                 color = Color.black
                             } else {
@@ -240,7 +377,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         +"Outfit"
                         attrs {
                             onClickFunction = {
-                                setcategory("Outfit")
+                                scope.launch {
+                                    setOutfitList(getAllOutfitBookmarks())
+                                }
+                                setcategory("outfit")
                             }
                         }
                     }
@@ -262,88 +402,59 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
                 }
                 div {
-                    clothingList.forEach { temp ->
-                        if(category =="All" || category =="Outfit") {
-                            styledDiv {
-                                css {
-                                    display = Display.flex
-                                    flexDirection = FlexDirection.row
-                                    borderBottomStyle = BorderStyle.solid
-                                    borderRightStyle = BorderStyle.solid
-                                    cursor = Cursor.pointer
-                                }
-                                styledDiv {
-                                    if (temp.isAdult) {
-                                        styledImg {
-                                            css {
-                                                marginTop = 0.px
-                                                height = 30.px
-                                                cursor = Cursor.pointer
-                                            }
-                                            attrs.src = "Bookmark_Icon.png"
-                                            attrs.onClickFunction = {
-                                                temp.isAdult = false
-                                                dummyIndex += 1
-                                                setdummyState(dummyIndex)
-                                            }
-                                        }
-                                    } else {
-                                        styledImg {
-                                            css {
-                                                marginTop = 0.px
-                                                height = 30.px
-                                                cursor = Cursor.pointer
-                                            }
-                                            attrs.src = "Selected_Bookmark_Icon.png"
-                                            attrs.onClickFunction = {
-                                                temp.isAdult = true
-                                                dummyIndex += 1
-                                                setdummyState(dummyIndex)
-                                            }
-                                        }
-                                    }
-                                }
+                        if(category =="outfit") {
+                            outfitList.forEach { outfit ->
                                 styledDiv {
                                     css {
                                         display = Display.flex
                                         flexDirection = FlexDirection.row
-                                        width = 80.pct
+                                        borderBottomStyle = BorderStyle.solid
+                                        borderRightStyle = BorderStyle.solid
+                                        cursor = Cursor.pointer
                                     }
-                                    styledH3 {
+                                    styledDiv {
                                         css {
-                                            marginLeft = 5.px
-                                            marginRight = 10.px
+                                            display = Display.flex
+                                            flexDirection = FlexDirection.row
+                                            width = 80.pct
                                         }
-                                        +"$index. "
+                                        styledH3 {
+                                            css {
+                                                marginLeft = 10.px
+                                            }
+                                            +"Saved Outfit $index"
+                                        }
                                     }
-                                    styledH3 {
-                                        +temp.title
+                                    //TODO How to show the price here without having to add them all up
+                                    styledDiv {
+                                        css {
+                                            display = Display.flex
+                                            flexDirection = FlexDirection.rowReverse
+                                            width = 20.pct
+                                            marginRight = 5.px
+                                            opacity = 1
+                                        }
+                                        p {
+                                            if (currentOutfit != null) {
+                                                +"$${round(outfit.headWear!!.price + outfit.midSection!!.price +
+                                                        outfit.lowerSection!!.price + outfit.footWear!!.price + outfit.accessory!!.price)}"
+                                            }
+                                        }
+                                    }
+                                    attrs {
+                                        onClickFunction = {
+                                            setCurrentOutfit(outfit)
+                                        }
                                     }
                                 }
-                                styledDiv {
-                                    css {
-                                        display = Display.flex
-                                        flexDirection = FlexDirection.rowReverse
-                                        width = 20.pct
-                                        marginRight = 5.px
-                                        opacity = 1
-                                    }
-                                    p {
-                                        +"$${temp.price}"
-                                    }
-                                }
-                                attrs {
-                                    onClickFunction = {
-                                        setselectitem(temp)
-                                    }
-                                }
+                                index += 1
                             }
-                            index += 1
                         }
                         else {
-                            if (temp.itemType
-                                    == (category[0].toLowerCase()
-                                            + category.subSequence(1, category.length).toString())) {
+                            //TODO FIGURE OUT THE GENDER OPTIONS
+                            clothingList.forEach { temp ->
+                                console.log(temp)
+                            if (temp.itemType == category && temp.genderPref == gender || gender == "all") {
                                 styledDiv {
                                     css {
                                         display = Display.flex
@@ -427,16 +538,28 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
             styledDiv {
                 css {
-                    maxWidth = 25.pct
+                    width = 25.pct
                     marginLeft = 10.px
                 }
-                if (selectitem != null) {
-                    child(
-                            ListOfItems,
+                if (category == "outfit"){
+                    if (currentOutfit != null){
+                        child (
+                            OutfitCard,
                             props = jsObject {
-                                item = selectitem
+                                console.log(currentOutfit)
+                                item = currentOutfit
                             }
-                    )
+                        )
+                    }
+                } else {
+                    if (selectitem != null) {
+                        child(
+                                ListOfItems,
+                                props = jsObject {
+                                    item = selectitem
+                                }
+                        )
+                    }
                 }
             }
         }

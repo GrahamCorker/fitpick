@@ -21,15 +21,16 @@ external interface OutfitProp : RProps {
 
 val OutfitCard = functionalComponent<OutfitProp> { props ->
     var price:Double = 0.0
-    console.log(props.item)
     styledDiv {
         css {
-            width = 250.px
-            height = 400.px
+            width = 100.pct
+            height = 100.pct
             borderStyle = BorderStyle.solid
             borderWidth = 3.px
             display = Display.flex
             flexDirection = FlexDirection.row
+            backgroundColor = Color.white
+            overflow = Overflow.auto
         }
 
         styledDiv{
@@ -39,13 +40,13 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
                 display = Display.flex
                 flexDirection = FlexDirection.column
                 alignItems = Align.center
-                justifyContent = JustifyContent.center
             }
 
             if (props.item.headWear != null) {
                 styledImg {
                     css {
-                        height = 20.pct
+                        marginTop = 10.px
+                        width = 70.pct
                     }
                     attrs.src = props.item.headWear!!.img
                 }
@@ -63,7 +64,7 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
             if (props.item.midSection != null) {
                 styledImg {
                     css {
-                        height = 20.pct
+                        width = 70.pct
                     }
                     attrs.src = props.item.midSection!!.img
                 }
@@ -81,7 +82,7 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
             if (props.item.lowerSection != null) {
                 styledImg {
                     css {
-                        height = 20.pct
+                        width = 70.pct
                     }
                     attrs.src = props.item.lowerSection!!.img
                 }
@@ -104,12 +105,12 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
                 display = Display.flex
                 flexDirection = FlexDirection.column
                 alignItems = Align.center
-                justifyContent = JustifyContent.center
             }
             if (props.item.footWear != null) {
                 styledImg {
                     css {
-                        height = 20.pct
+                        marginTop = 10.px
+                        width = 70.pct
                     }
                     attrs.src = props.item.footWear!!.img
                 }
@@ -127,7 +128,7 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
             if (props.item.accessory != null) {
                 styledImg {
                     css {
-                        height = 20.pct
+                        width = 70.pct
                     }
                     attrs.src = props.item.accessory!!.img
                 }
