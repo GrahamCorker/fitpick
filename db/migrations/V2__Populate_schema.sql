@@ -434,8 +434,15 @@ VALUES(
 
 INSERT INTO savesOutfit(outfitId, userId, createdAt) 
 VALUES (
-    (SELECT outfitID AS outfitIdentification FROM outfit ORDER BY RANDOM() LIMIT 1),
-    (SELECT userId AS userIdentification FROM accounts ORDER BY RANDOM() LIMIT 1),
+    2,
+    1,
+    now()
+);
+
+INSERT INTO savesOutfit(outfitId, userId, createdAt)
+VALUES (
+    1,
+    1,
     now()
 );
 

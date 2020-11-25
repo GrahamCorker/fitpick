@@ -17,8 +17,8 @@ class OutfitService {
             headWear = row[Outfit.headWear],
             midSection = row[Outfit.midSection],
             lowerSection = row[Outfit.lowerSection],
-            accessory = row[Outfit.midSection],
-            footWear = row[Outfit.midSection]
+            accessory = row[Outfit.accessory],
+            footWear = row[Outfit.footWear]
         )
     }
 
