@@ -32,11 +32,11 @@ class OutfitService {
     suspend fun toCompleteOutfit(outfitObj: OutfitObj): OutfitWithClothes{
         return OutfitWithClothes(
             outfitId = outfitObj.outfitId,
-            headWear = clothingService.getClothingItemById(outfitObj.headWear),
-            midSection = clothingService.getClothingItemById(outfitObj.midSection),
-            lowerSection = clothingService.getClothingItemById(outfitObj.lowerSection),
-            accessory = clothingService.getClothingItemById(outfitObj.accessory),
-            footWear = clothingService.getClothingItemById(outfitObj.footWear),
+            headWear = clothingService.getClothingItemById(outfitObj.headWear, 0),
+            midSection = clothingService.getClothingItemById(outfitObj.midSection, 0),
+            lowerSection = clothingService.getClothingItemById(outfitObj.lowerSection,0),
+            accessory = clothingService.getClothingItemById(outfitObj.accessory,0),
+            footWear = clothingService.getClothingItemById(outfitObj.footWear,0),
         )
     }
 

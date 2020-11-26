@@ -72,14 +72,20 @@ fun main() {
             authenticate {
                 route(ClothingItem.path) {
                     get("/all"){
-                        //make this return a list with bookmarks implemented based on userID
-                        val clothingList = clothingService.getAllClothingItems()
+                        val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                        val userEmail = principal.name
+                        val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                        val fullUser = accountService.toSerializableAccount(user);
+                        val clothingList = clothingService.getAllClothingItems(fullUser.userId)
                         call.respond(clothingList)
                     }
 
                     get("/top-ten") {
-                        //will also need to take in userId to determine bookmarks
-                        val topten = bookmarkService.getTopTenClothingItems()
+                        val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
+                        val userEmail = principal.name
+                        val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
+                        val fullUser = accountService.toSerializableAccount(user);
+                        val topten = bookmarkService.getTopTenClothingItems(fullUser.userId);
                         call.respond(topten)
                     }
 

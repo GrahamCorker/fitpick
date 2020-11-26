@@ -464,16 +464,17 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                         cursor = Cursor.pointer
                                     }
                                     styledDiv {
-                                        if (temp.isAdult) {
+                                        if (temp.isBookmarked) {
                                             styledImg {
                                                 css {
                                                     marginTop = 0.px
                                                     height = 30.px
                                                     cursor = Cursor.pointer
                                                 }
-                                                attrs.src = "Bookmark_Icon.png"
+                                                //Currently bookmarked items are red
+                                                attrs.src = "Selected_Bookmark_Icon.png"
                                                 attrs.onClickFunction = {
-                                                    temp.isAdult = false
+                                                    temp.isBookmarked = false
                                                     dummyIndex += 1
                                                     setdummyState(dummyIndex)
                                                 }
@@ -485,9 +486,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                                     height = 30.px
                                                     cursor = Cursor.pointer
                                                 }
-                                                attrs.src = "Selected_Bookmark_Icon.png"
+                                                //Unbookmarked clothing items are black
+                                                attrs.src = "Bookmark_Icon.png"
                                                 attrs.onClickFunction = {
-                                                    temp.isAdult = true
+                                                    temp.isBookmarked = true
                                                     dummyIndex += 1
                                                     setdummyState(dummyIndex)
                                                 }

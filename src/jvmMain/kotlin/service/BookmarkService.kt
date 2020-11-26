@@ -42,8 +42,7 @@ class BookmarkService {
         }
     }
 
-    suspend fun getTopTenClothingItems():List<ClothingItem> {
-
+    suspend fun getTopTenClothingItems(userId: Int):List<ClothingItem> {
         val mostBookmarked = dbQuery {
             savesClothing.slice(savesClothing.cid, savesClothing.cid.count()).selectAll()
                 .orderBy(savesClothing.cid.count() to SortOrder.DESC).limit(10)
@@ -51,7 +50,7 @@ class BookmarkService {
         }
 
         return mostBookmarked.map{mostBookmarked->
-            clothingService.getClothingItemById(mostBookmarked)!!
+            clothingService.getClothingItemById(mostBookmarked, userId)!!
         }
 
     }
@@ -97,6 +96,18 @@ class BookmarkService {
     }
 
 
+    suspend fun isClothingItemBookmarked(cid: Int, userId: Int): Boolean {
+        //check if cid is tied to any users in savesClothing. Convert to clothing bookmark, and if null, return false
+        val bookmark = dbQuery {
+            //this will return 1 and only 1 bookmark
+            savesClothing.select{
+                (savesClothing.cid eq cid and (savesClothing.userId eq userId))
+            }.mapNotNull { toClothingBookmark(it) }
+        }
+
+        return !bookmark.isNullOrEmpty()
+
+    }
 
 
 }
