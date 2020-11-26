@@ -37,6 +37,7 @@ class OutfitService {
             lowerSection = clothingService.getClothingItemById(outfitObj.lowerSection,0),
             accessory = clothingService.getClothingItemById(outfitObj.accessory,0),
             footWear = clothingService.getClothingItemById(outfitObj.footWear,0),
+            isBookmarked = true
         )
     }
 

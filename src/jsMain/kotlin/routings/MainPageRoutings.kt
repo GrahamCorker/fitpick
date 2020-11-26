@@ -95,6 +95,10 @@ val MainPageRoutes = functionalComponent<RProps> { _ ->
                         css {
                             maxHeight = 50.px
                             padding(horizontal = 15.px)
+                            if(currentPage == "Settings")
+                            {
+                                opacity = .30
+                            }
                         }
                         attrs {
                             src = "Gear_Icon.png"
@@ -108,6 +112,10 @@ val MainPageRoutes = functionalComponent<RProps> { _ ->
                         css {
                             maxHeight = 50.px
                             padding(horizontal = 15.px)
+                            if(currentPage == "Top 10")
+                            {
+                                opacity = .30
+                            }
                         }
                         attrs {
                             src = "Star_Icon.png"
@@ -121,6 +129,10 @@ val MainPageRoutes = functionalComponent<RProps> { _ ->
                         css {
                             maxHeight = 50.px
                             padding(horizontal = 15.px)
+                            if(currentPage == "Bookmarks")
+                            {
+                                opacity = .30
+                            }
                         }
                         attrs {
                             src = "Bookmark_Icon.png"
@@ -134,6 +146,10 @@ val MainPageRoutes = functionalComponent<RProps> { _ ->
                         css {
                             maxHeight = 50.px
                             padding(horizontal = 15.px)
+                            if(currentPage == "Home")
+                            {
+                                opacity = .30
+                            }
                         }
                         attrs {
                             src = "Home_Icon.png"

@@ -45,6 +45,7 @@ suspend fun getUser(): Account {
     }
 }
 
+
 suspend fun getClothingList(): List<ClothingItem> {
     return jsonClient.get(endpoint + ClothingItem.path + "/all"){
         header("Authorization", "Bearer ${localStorage.getItem("token")}")

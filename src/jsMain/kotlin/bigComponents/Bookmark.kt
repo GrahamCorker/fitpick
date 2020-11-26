@@ -3,6 +3,8 @@ package bigComponents
 import ClothingItem
 import OutfitWithClothes
 import bookmarkClothingItem
+import deleteClothingItemBookmark
+import deleteOutfitBookmark
 import getAllClothingBookmarks
 import getAllOutfitBookmarks
 import getClothingList
@@ -218,6 +220,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
+                                    setselectitem(null);
                                     setClothingList(getAllClothingBookmarks("headwear"))
                                 }
                                 setcategory("headwear")
@@ -250,6 +253,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
+                                    setselectitem(null);
                                     setClothingList(getAllClothingBookmarks("midSection"))
                                 }
                                 setcategory("midSection")
@@ -282,6 +286,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
+                                    setselectitem(null);
                                     setClothingList(getAllClothingBookmarks("lowerSection"))
                                 }
                                 setcategory("lowerSection")
@@ -314,6 +319,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
+                                    setselectitem(null);
                                     setClothingList(getAllClothingBookmarks("footwear"))
                                 }
                                 setcategory("footwear")
@@ -346,6 +352,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
+                                    setselectitem(null);
                                     setClothingList(getAllClothingBookmarks("accessory"))
                                 }
                                 setcategory("accessory")
@@ -378,6 +385,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
+                                    setselectitem(null);
                                     setOutfitList(getAllOutfitBookmarks())
                                 }
                                 setcategory("outfit")
@@ -403,57 +411,121 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 }
                 div {
                         if(category =="outfit") {
-                            outfitList.forEach { outfit ->
-                                styledDiv {
-                                    css {
-                                        display = Display.flex
-                                        flexDirection = FlexDirection.row
-                                        borderBottomStyle = BorderStyle.solid
-                                        borderRightStyle = BorderStyle.solid
-                                        cursor = Cursor.pointer
+                            if(outfitList.isEmpty())
+                            {
+                                styledDiv{
+                                    styledH4{
+                                        css {
+                                            marginLeft = 10.px
+                                        }
+                                        + "You do not have any bookmarked outfits :("
                                     }
+                                }
+                            }
+                            else{
+                                outfitList.forEach { outfit ->
                                     styledDiv {
                                         css {
                                             display = Display.flex
                                             flexDirection = FlexDirection.row
-                                            width = 80.pct
+                                            borderBottomStyle = BorderStyle.solid
+                                            borderRightStyle = BorderStyle.solid
+                                            cursor = Cursor.pointer
+                                            if(outfit == currentOutfit)
+                                            {
+                                                backgroundColor = Color.lightGray;
+                                            }
                                         }
-                                        styledH3 {
+                                        styledDiv {
+                                            if (outfit.isBookmarked) {
+                                                styledImg {
+                                                    css {
+                                                        marginTop = 0.px
+                                                        height = 30.px
+                                                        cursor = Cursor.pointer
+                                                    }
+                                                    attrs.src = "Selected_Bookmark_Icon.png"
+                                                    attrs.onClickFunction = {
+                                                        outfit.isBookmarked = false
+                                                        dummyIndex += 1
+                                                        setdummyState(dummyIndex)
+                                                    }
+                                                }
+                                            } else {
+                                                styledImg {
+                                                    css {
+                                                        marginTop = 7.px
+                                                        marginLeft = 5.px
+                                                        marginRight = 5.px
+                                                        height = 45.px
+                                                        cursor = Cursor.pointer
+                                                    }
+                                                    attrs.src = "confirm-delete-icon.png"
+                                                    attrs.onClickFunction = {
+                                                        dummyIndex += 1
+                                                        setdummyState(dummyIndex)
+                                                        scope.launch{
+                                                            setCurrentOutfit(null)
+                                                            deleteOutfitBookmark(outfit)
+                                                            setOutfitList(getAllOutfitBookmarks())
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        styledDiv {
                                             css {
-                                                marginLeft = 10.px
+                                                display = Display.flex
+                                                flexDirection = FlexDirection.row
+                                                width = 80.pct
                                             }
-                                            +"Saved Outfit $index"
-                                        }
-                                    }
-                                    //TODO How to show the price here without having to add them all up
-                                    styledDiv {
-                                        css {
-                                            display = Display.flex
-                                            flexDirection = FlexDirection.rowReverse
-                                            width = 20.pct
-                                            marginRight = 5.px
-                                            opacity = 1
-                                        }
-                                        p {
-                                            if (currentOutfit != null) {
-                                                +"$${round(outfit.headWear!!.price + outfit.midSection!!.price +
-                                                        outfit.lowerSection!!.price + outfit.footWear!!.price + outfit.accessory!!.price)}"
+                                            styledH3 {
+                                                css {
+                                                    marginLeft = 10.px
+                                                }
+                                                +"Saved Outfit $index"
                                             }
                                         }
-                                    }
-                                    attrs {
-                                        onClickFunction = {
-                                            setCurrentOutfit(outfit)
+                                        //TODO How to show the price here without having to add them all up
+                                        styledDiv {
+                                            css {
+                                                display = Display.flex
+                                                flexDirection = FlexDirection.rowReverse
+                                                width = 20.pct
+                                                marginRight = 5.px
+                                                opacity = 1
+                                            }
+                                            p {
+                                                if (currentOutfit != null) {
+                                                    +"$${round(outfit.headWear!!.price + outfit.midSection!!.price +
+                                                            outfit.lowerSection!!.price + outfit.footWear!!.price + outfit.accessory!!.price)}"
+                                                }
+                                            }
+                                        }
+                                        attrs {
+                                            onClickFunction = {
+                                                setCurrentOutfit(outfit)
+                                            }
                                         }
                                     }
+                                    index += 1
                                 }
-                                index += 1
                             }
                         }
                         else {
                             //TODO FIGURE OUT THE GENDER OPTIONS
+                            if(clothingList.isEmpty())
+                            {
+                                styledDiv{
+                                    styledH4{
+                                        css {
+                                            marginLeft = 10.px
+                                        }
+                                        + "You do not have any bookmarked items of this type :("
+                                    }
+                                }
+                            }
                             clothingList.forEach { temp ->
-                                console.log(temp)
                             if (temp.itemType == category && temp.genderPref == gender || gender == "all") {
                                 styledDiv {
                                     css {
@@ -462,6 +534,9 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                         borderBottomStyle = BorderStyle.solid
                                         borderRightStyle = BorderStyle.solid
                                         cursor = Cursor.pointer
+                                        if(temp == selectitem) {
+                                            backgroundColor = Color.lightGray;
+                                        }
                                     }
                                     styledDiv {
                                         if (temp.isBookmarked) {
@@ -482,16 +557,22 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                         } else {
                                             styledImg {
                                                 css {
-                                                    marginTop = 0.px
-                                                    height = 30.px
+                                                    marginTop = 7.px
+                                                    marginLeft = 5.px
+                                                    marginRight = 5.px
+                                                    height = 45.px
                                                     cursor = Cursor.pointer
                                                 }
                                                 //Unbookmarked clothing items are black
-                                                attrs.src = "Bookmark_Icon.png"
+                                                attrs.src = "confirm-delete-icon.png"
                                                 attrs.onClickFunction = {
-                                                    temp.isBookmarked = true
                                                     dummyIndex += 1
                                                     setdummyState(dummyIndex)
+                                                    scope.launch{
+                                                        setselectitem(null)
+                                                        deleteClothingItemBookmark(temp)
+                                                        setClothingList(getAllClothingBookmarks(temp.itemType))
+                                                    }
                                                 }
                                             }
                                         }
@@ -548,7 +629,6 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         child (
                             OutfitCard,
                             props = jsObject {
-                                console.log(currentOutfit)
                                 item = currentOutfit
                             }
                         )
