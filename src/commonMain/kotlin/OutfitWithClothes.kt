@@ -8,7 +8,8 @@ data class OutfitWithClothes(
     val lowerSection: ClothingItem?,
     val footWear: ClothingItem?,
     val accessory: ClothingItem?,
-    var isBookmarked: Boolean
+    var isBookmarked: Boolean,
+    var elapsed: String
 ){
     companion object {
         const val path = "/outfit"

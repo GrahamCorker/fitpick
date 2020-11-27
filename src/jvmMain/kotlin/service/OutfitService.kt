@@ -4,6 +4,7 @@ import models.OutfitObj
 import DatabaseFactory.dbQuery
 import OutfitWithClothes
 import org.jetbrains.exposed.sql.*
+import org.joda.time.DateTime
 
 
 class OutfitService {
@@ -29,7 +30,7 @@ class OutfitService {
 
     //TODO: Move this into models
     //Function to convert a vanilla outfit to an Outfit Object with Clothes properties
-    suspend fun toCompleteOutfit(outfitObj: OutfitObj): OutfitWithClothes{
+    suspend fun toCompleteOutfit(outfitObj: OutfitObj, elapsed: String): OutfitWithClothes{
         return OutfitWithClothes(
             outfitId = outfitObj.outfitId,
             headWear = clothingService.getClothingItemById(outfitObj.headWear, 0),
@@ -37,7 +38,8 @@ class OutfitService {
             lowerSection = clothingService.getClothingItemById(outfitObj.lowerSection,0),
             accessory = clothingService.getClothingItemById(outfitObj.accessory,0),
             footWear = clothingService.getClothingItemById(outfitObj.footWear,0),
-            isBookmarked = true
+            isBookmarked = true,
+                elapsed = elapsed
         )
     }
 
@@ -46,7 +48,7 @@ class OutfitService {
     suspend fun listToOutfitObj(outfitList: List<OutfitObj>): List<OutfitWithClothes>{
         val listOfOutfits = mutableListOf<OutfitWithClothes>()
         for (outfitObj in outfitList) {
-            listOfOutfits.add(toCompleteOutfit(outfitObj))
+            listOfOutfits.add(toCompleteOutfit(outfitObj, ""))
         }
         return listOfOutfits;
     }
@@ -74,7 +76,7 @@ class OutfitService {
             footWear = cidFoot!!
         )
 
-        return toCompleteOutfit(outfit)
+        return toCompleteOutfit(outfit, "")
 
     }
 

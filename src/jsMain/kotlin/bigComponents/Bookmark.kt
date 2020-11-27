@@ -485,6 +485,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                                 }
                                                 +"Saved Outfit $index"
                                             }
+                                            styledH3 {
+                                                css{
+                                                    margin(horizontal = 70.px)
+                                                    margin(vertical = 23.px)
+                                                    color = Color.cadetBlue
+                                                    fontSize = 14.px
+                                                }
+                                                +outfit.elapsed
+                                            }
                                         }
                                         //TODO How to show the price here without having to add them all up
                                         styledDiv {
@@ -592,6 +601,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                         }
                                         styledH3 {
                                             +temp.title
+                                        }
+                                        styledH3 {
+                                            css{
+                                                margin(horizontal = 70.px)
+                                                margin(vertical = 23.px)
+                                                color = Color.cadetBlue
+                                                fontSize = 14.px
+                                            }
+                                            +temp.elapsed
                                         }
                                     }
                                     styledDiv {

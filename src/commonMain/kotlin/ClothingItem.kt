@@ -10,9 +10,11 @@ data class ClothingItem(
         var title: String,
         val img: String,
         val itemType: String,
-        var isBookmarked: Boolean
+        var isBookmarked: Boolean,
+        var elapsed: String
 ){
     companion object {
         const val path = "/clothingItem"
     }
 }
+

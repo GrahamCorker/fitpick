@@ -5,6 +5,7 @@ import ClothingItem
 import models.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.insertAndGetId
+import org.joda.time.*
 
 class BookmarkService {
 
@@ -37,10 +38,12 @@ class BookmarkService {
             }.mapNotNull { toClothingBookmark(it) }
         }
 
+        //newest bookmarks first
         return clothingBookmarks.mapNotNull{clothingBookmark ->
-            clothingService.getClothingItemByType(itemType, clothingBookmark.cid)
-        }
+            clothingService.getClothingItemByType(itemType, clothingBookmark.cid, clothingBookmark.createdAt)
+        }.reversed()
     }
+
 
     suspend fun getTopTenClothingItems(userId: Int):List<ClothingItem> {
         val mostBookmarked = dbQuery {
@@ -82,9 +85,10 @@ class BookmarkService {
             }.mapNotNull { toOutfitBookmark(it) }
         }
 
+        //newest bookmarks first
         return outfitBookmarks.map{outfitBookmark ->
-            outfitService.toCompleteOutfit(outfitService.getOutfitById(outfitBookmark.outfitID)!!)
-        }
+            outfitService.toCompleteOutfit(outfitService.getOutfitById(outfitBookmark.outfitID)!!, bookmarkService.getElapsedTime(outfitBookmark.createdAt))
+        }.reversed()
 
     }
 
@@ -106,6 +110,25 @@ class BookmarkService {
         }
 
         return !bookmark.isNullOrEmpty()
+
+    }
+
+    fun getElapsedTime(createdAt: DateTime): String {
+        val days = Days.daysBetween(createdAt.toLocalDateTime(), LocalDateTime.now()).days
+        val hours = Hours.hoursBetween(createdAt.toLocalDateTime(), LocalDateTime.now()).hours
+        val minutes = Minutes.minutesBetween(createdAt.toLocalDateTime(), LocalDateTime.now()).minutes
+        val seconds = Seconds.secondsBetween(createdAt.toLocalDateTime(), LocalDateTime.now()).seconds
+        return when(seconds){
+            in 0..4 -> "Bookmarked just now"
+            in 5..59 -> "Bookmarked $seconds seconds ago"
+            in 60..119 -> "Bookmarked $minutes minute ago"
+            in 120..3599 -> "Bookmarked $minutes minutes ago"
+            in 3600..7199 -> "Bookmarked $hours hour ago"
+            in 7200..86399 -> "Bookmarked $hours hours ago"
+            in 86400..172799 -> "Bookmarked $days day ago"
+            in 172800..Int.MAX_VALUE -> "$days days ago"
+            else -> "Could not calculate time since bookmark"
+        }
 
     }
 

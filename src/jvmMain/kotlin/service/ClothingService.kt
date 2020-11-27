@@ -3,12 +3,12 @@ package service
 import models.Clothing
 import ClothingItem
 import DatabaseFactory.dbQuery
-import io.ktor.client.features.*
 import org.jetbrains.exposed.sql.*
+import org.joda.time.*
 
 class ClothingService {
 
-    private fun toClothingItem(row: ResultRow, isBookmarked: Boolean): ClothingItem =
+    private fun toClothingItem(row: ResultRow, isBookmarked: Boolean, elapsed: String): ClothingItem =
             ClothingItem(
                     cid = row[Clothing.cid],
                     price = row[Clothing.price].toDouble(),
@@ -18,10 +18,11 @@ class ClothingService {
                     title = row[Clothing.title],
                     img = row[Clothing.img],
                     itemType = row[Clothing.itemType],
-                    isBookmarked = isBookmarked
+                    isBookmarked = isBookmarked,
+                    elapsed = elapsed
             )
 
-    private fun toClothingWithBookmarks(clothingItem: ClothingItem, isBookmarked: Boolean): ClothingItem =
+    private fun toClothingWithBookmarks(clothingItem: ClothingItem, isBookmarked: Boolean, elapsed: String): ClothingItem =
             ClothingItem(
                     cid = clothingItem.cid,
                     price = clothingItem.price,
@@ -31,7 +32,8 @@ class ClothingService {
                     title = clothingItem.title,
                     img = clothingItem.img,
                     itemType = clothingItem.itemType,
-                    isBookmarked = isBookmarked
+                    isBookmarked = isBookmarked,
+                    elapsed = elapsed
             )
 
     private fun toCid(row:ResultRow): Int =
@@ -41,10 +43,10 @@ class ClothingService {
     //SELECT * FROM clothing;
     suspend fun getAllClothingItems(userId: Int): List<ClothingItem> {
         val clothes = dbQuery {
-            Clothing.selectAll().map{toClothingItem(it, true)}
+            Clothing.selectAll().map{toClothingItem(it, true, "")}
         }
         return clothes.map{clothes->
-            toClothingWithBookmarks(clothes, bookmarkService.isClothingItemBookmarked(clothes.cid, userId))
+            toClothingWithBookmarks(clothes, bookmarkService.isClothingItemBookmarked(clothes.cid, userId), "")
         }
     }
 
@@ -53,18 +55,18 @@ class ClothingService {
         val clothingItem = dbQuery {
             Clothing.select{
                 (Clothing.cid eq id)
-            }.mapNotNull { toClothingItem(it, true) }.singleOrNull()
+            }.mapNotNull { toClothingItem(it, true, "") }.singleOrNull()
         }
 
-        return toClothingWithBookmarks(clothingItem!!, bookmarkService.isClothingItemBookmarked(clothingItem.cid, userId))
+        return toClothingWithBookmarks(clothingItem!!, bookmarkService.isClothingItemBookmarked(clothingItem.cid, userId), "")
 
     }
 
-    suspend fun getClothingItemByType(itemType: String, cid: Int): ClothingItem? {
+    suspend fun getClothingItemByType(itemType: String, cid: Int, createdAt: DateTime): ClothingItem? {
        return dbQuery {
             Clothing.select{
                 (Clothing.cid eq cid and (Clothing.itemType eq itemType))
-            }.mapNotNull { toClothingItem(it, true) }.singleOrNull()
+            }.mapNotNull { toClothingItem(it, true, bookmarkService.getElapsedTime(createdAt)) }.singleOrNull()
         }
 
     }
