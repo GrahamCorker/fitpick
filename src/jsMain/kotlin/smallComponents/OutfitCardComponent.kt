@@ -3,15 +3,8 @@ package smallComponents
 import OutfitWithClothes
 import kotlinx.css.*
 import react.RProps
-import react.dom.a
-import react.dom.h1
-import react.dom.head
-import react.dom.img
 import react.functionalComponent
-import react.useState
 import styled.*
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 import kotlin.math.round
 
 external interface OutfitProp : RProps {
@@ -29,7 +22,7 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
             borderWidth = 3.px
             display = Display.flex
             flexDirection = FlexDirection.row
-            backgroundColor = Color.white
+            backgroundColor = Color.floralWhite
             overflow = Overflow.auto
         }
 
@@ -105,6 +98,7 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
                 display = Display.flex
                 flexDirection = FlexDirection.column
                 alignItems = Align.center
+                justifyContent = JustifyContent.center
             }
             if (props.item.footWear != null) {
                 styledImg {
@@ -145,6 +139,10 @@ val OutfitCard = functionalComponent<OutfitProp> { props ->
 
 
             styledH2{
+                css {
+                    marginTop = 20.px
+                }
+                +"Total: "
                 +"$${round(price)}"
             }
         }

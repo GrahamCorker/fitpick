@@ -21,6 +21,29 @@ import smallComponents.ListOfItems
 import smallComponents.OutfitCard
 import kotlin.math.round
 
+object BookmarkPageStyles: StyleSheet("BookmarkPageStyles", isStatic = true) {
+    val genderButton by css {
+        width = 20.pct
+        height = 60.px
+    }
+
+    val clothingButton by css {
+        width = 90.pct
+        height = 60.px
+    }
+
+    val sectionButton by css {
+        borderStyle = BorderStyle.solid
+        borderWidth = 3.px
+        textAlign = TextAlign.center
+        textDecoration = TextDecoration.none
+        display = Display.inlineBlock
+        fontSize = 16.px
+        fontWeight = FontWeight.bold
+        cursor = Cursor.pointer
+        borderColor = Color.black
+    }
+}
 
 var dummyIndex:Int = 0
 private val scope = MainScope()
@@ -64,23 +87,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
             styledButton {
                 css {
-                    width = 20.pct
-                    height = 60.px
                     if (gender != "male") {
-                        backgroundColor = Color.white
+                        backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
-                        backgroundColor = Color.red
+                        backgroundColor = Color.crimson
                         color = Color.white
                     }
-                    borderStyle = BorderStyle.solid
-                    borderWidth = 3.px
-                    textAlign = TextAlign.center
-                    textDecoration = TextDecoration.none
-                    display = Display.inlineBlock
-                    fontSize = 16.px
-                    fontWeight = FontWeight.bold
-                    cursor = Cursor.pointer
+                    +BookmarkPageStyles.genderButton
+                    +BookmarkPageStyles.sectionButton
                 }
                 +"Male"
                 attrs {
@@ -92,23 +107,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
             styledButton {
                 css {
-                    width = 20.pct
-                    height = 60.px
                     if (gender != "female") {
-                        backgroundColor = Color.white
+                        backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
-                        backgroundColor = Color.red
+                        backgroundColor = Color.crimson
                         color = Color.white
                     }
-                    borderStyle = BorderStyle.solid
-                    borderWidth = 3.px
-                    textAlign = TextAlign.center
-                    textDecoration = TextDecoration.none
-                    display = Display.inlineBlock
-                    fontSize = 16.px
-                    fontWeight = FontWeight.bold
-                    cursor = Cursor.pointer
+                    +BookmarkPageStyles.genderButton
+                    +BookmarkPageStyles.sectionButton
                 }
                 +"Female"
                 attrs {
@@ -120,23 +127,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
             styledButton {
                 css {
-                    width = 20.pct
-                    height = 60.px
                     if (gender != "unisex") {
-                        backgroundColor = Color.white
+                        backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
-                        backgroundColor = Color.red
+                        backgroundColor = Color.crimson
                         color = Color.white
                     }
-                    borderStyle = BorderStyle.solid
-                    borderWidth = 3.px
-                    textAlign = TextAlign.center
-                    textDecoration = TextDecoration.none
-                    display = Display.inlineBlock
-                    fontSize = 16.px
-                    fontWeight = FontWeight.bold
-                    cursor = Cursor.pointer
+                    +BookmarkPageStyles.genderButton
+                    +BookmarkPageStyles.sectionButton
                 }
                 +"Unisex"
                 attrs {
@@ -148,23 +147,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
             styledButton {
                 css {
-                    width = 20.pct
-                    height = 60.px
                     if (gender != "all") {
-                        backgroundColor = Color.white
+                        backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
-                        backgroundColor = Color.red
+                        backgroundColor = Color.crimson
                         color = Color.white
                     }
-                    borderStyle = BorderStyle.solid
-                    borderWidth = 3.px
-                    textAlign = TextAlign.center
-                    textDecoration = TextDecoration.none
-                    display = Display.inlineBlock
-                    fontSize = 16.px
-                    fontWeight = FontWeight.bold
-                    cursor = Cursor.pointer
+                    +BookmarkPageStyles.genderButton
+                    +BookmarkPageStyles.sectionButton
                 }
                 +"All"
                 attrs {
@@ -198,23 +189,16 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            width = 90.pct
-                            height = 60.px
+                            //TODO: figure out how to reuse this conditional css
                             if (category != "headwear") {
-                                backgroundColor = Color.white
+                                backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
-                                backgroundColor = Color.red
+                                backgroundColor = Color.crimson
                                 color = Color.white
                             }
-                            borderStyle = BorderStyle.solid
-                            borderWidth = 3.px
-                            textAlign = TextAlign.center
-                            textDecoration = TextDecoration.none
-                            display = Display.inlineBlock
-                            fontSize = 16.px
-                            fontWeight = FontWeight.bold
-                            cursor = Cursor.pointer
+                            +BookmarkPageStyles.clothingButton
+                            +BookmarkPageStyles.sectionButton
                         }
                         +"Headwear"
                         attrs {
@@ -234,20 +218,13 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                             width = 90.pct
                             height = 60.px
                             if (category != "midSection") {
-                                backgroundColor = Color.white
+                                backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
-                                backgroundColor = Color.red
+                                backgroundColor = Color.crimson
                                 color = Color.white
                             }
-                            borderStyle = BorderStyle.solid
-                            borderWidth = 3.px
-                            textAlign = TextAlign.center
-                            textDecoration = TextDecoration.none
-                            display = Display.inlineBlock
-                            fontSize = 16.px
-                            fontWeight = FontWeight.bold
-                            cursor = Cursor.pointer
+                            +BookmarkPageStyles.sectionButton
                         }
                         +"Midsection"
                         attrs {
@@ -264,23 +241,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            width = 90.pct
-                            height = 60.px
                             if (category != "lowerSection") {
-                                backgroundColor = Color.white
+                                backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
-                                backgroundColor = Color.red
+                                backgroundColor = Color.crimson
                                 color = Color.white
                             }
-                            borderStyle = BorderStyle.solid
-                            borderWidth = 3.px
-                            textAlign = TextAlign.center
-                            textDecoration = TextDecoration.none
-                            display = Display.inlineBlock
-                            fontSize = 16.px
-                            fontWeight = FontWeight.bold
-                            cursor = Cursor.pointer
+                            +BookmarkPageStyles.clothingButton
+                            +BookmarkPageStyles.sectionButton
                         }
                         +"Lowersection"
                         attrs {
@@ -297,23 +266,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            width = 90.pct
-                            height = 60.px
                             if (category != "footwear") {
-                                backgroundColor = Color.white
+                                backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
-                                backgroundColor = Color.red
+                                backgroundColor = Color.crimson
                                 color = Color.white
                             }
-                            borderStyle = BorderStyle.solid
-                            borderWidth = 3.px
-                            textAlign = TextAlign.center
-                            textDecoration = TextDecoration.none
-                            display = Display.inlineBlock
-                            fontSize = 16.px
-                            fontWeight = FontWeight.bold
-                            cursor = Cursor.pointer
+                            +BookmarkPageStyles.clothingButton
+                            +BookmarkPageStyles.sectionButton
                         }
                         +"Footwear"
                         attrs {
@@ -330,23 +291,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            width = 90.pct
-                            height = 60.px
                             if (category != "accessory") {
-                                backgroundColor = Color.white
+                                backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
-                                backgroundColor = Color.red
+                                backgroundColor = Color.crimson
                                 color = Color.white
                             }
-                            borderStyle = BorderStyle.solid
-                            borderWidth = 3.px
-                            textAlign = TextAlign.center
-                            textDecoration = TextDecoration.none
-                            display = Display.inlineBlock
-                            fontSize = 16.px
-                            fontWeight = FontWeight.bold
-                            cursor = Cursor.pointer
+                            +BookmarkPageStyles.clothingButton
+                            +BookmarkPageStyles.sectionButton
                         }
                         +"Accessories"
                         attrs {
@@ -363,23 +316,15 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            width = 90.pct
-                            height = 60.px
                             if (category != "outfit") {
-                                backgroundColor = Color.white
+                                backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
-                                backgroundColor = Color.red
+                                backgroundColor = Color.crimson
                                 color = Color.white
                             }
-                            borderStyle = BorderStyle.solid
-                            borderWidth = 3.px
-                            textAlign = TextAlign.center
-                            textDecoration = TextDecoration.none
-                            display = Display.inlineBlock
-                            fontSize = 16.px
-                            fontWeight = FontWeight.bold
-                            cursor = Cursor.pointer
+                            +BookmarkPageStyles.clothingButton
+                            +BookmarkPageStyles.sectionButton
                         }
                         +"Outfit"
                         attrs {
@@ -406,8 +351,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                     borderLeftStyle = BorderStyle.solid
                     borderRightStyle = BorderStyle.solid
                     borderBottomStyle = BorderStyle.solid
-                    backgroundColor = Color.white
-
+                    backgroundColor = Color.floralWhite
                 }
                 div {
                         if(category =="outfit") {
