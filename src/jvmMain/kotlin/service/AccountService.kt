@@ -67,3 +67,5 @@ class AccountService {
         }
     }
 }
+
+val accountService = AccountService()

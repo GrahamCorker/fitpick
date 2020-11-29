@@ -11,12 +11,7 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import service.*
 import io.ktor.auth.jwt.jwt
-
-val clothingList = mutableListOf(
-    ClothingListItem("Shirt", 1),
-    ClothingListItem("Pants", 2),
-    ClothingListItem("Socks", 3)
-)
+import routes.userRoutes
 
 fun main() {
     val accountService = AccountService()
@@ -55,19 +50,8 @@ fun main() {
                 println(token)
                 call.respond(token)
             }
-            post(Signup.path) {
-                    val post = call.receive<Signup>()
-                    val user = accountService.createAccount(post)
-                    call.respond(HttpStatusCode.OK)
-            }
-            authenticate {
-                get("/user") {
-                    val principal = call.principal<UserIdPrincipal>() ?: error("No principal detected")
-                    val userEmail = principal.name
-                    val user = accountService.getAccountByEmail(userEmail) ?: error("User not found")
-                    call.respond(accountService.toSerializableAccount(user))
-                }
-            }
+
+            userRoutes()
 
             authenticate {
                 route(ClothingItem.path) {
@@ -122,8 +106,6 @@ fun main() {
                 }
             }
 
-
-
             authenticate {
                 route(OutfitWithClothes.path)
                 {
@@ -160,27 +142,12 @@ fun main() {
                 }
             }
 
-            route(ClothingListItem.path) {
-                get {
-                    call.respond(clothingList)
-                }
-                post {
-                    clothingList += call.receive<ClothingListItem>()
-                    call.respond(HttpStatusCode.OK)
-                }
-                delete("/{id}") {
-                    val id = call.parameters["id"]?.toInt() ?: error("Invalid delete request")
-                    clothingList.removeIf { it.id == id }
-                    call.respond(HttpStatusCode.OK)
-                }
-            }
             get("/") {
                 call.respondText(
                     this::class.java.classLoader.getResource("index.html")!!.readText(),
                     ContentType.Text.Html
                 )
             }
-
 
             static("/") {
                 resources("")

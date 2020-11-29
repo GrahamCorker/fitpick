@@ -1,4 +1,4 @@
-package bigComponents
+package smallComponents
 
 import Signup
 import io.ktor.client.features.*
@@ -13,21 +13,34 @@ import kotlinx.css.properties.TextDecoration
 import kotlinx.css.properties.s
 import kotlinx.css.properties.transition
 import kotlinx.html.InputType
-import smallComponents.InputComponent
 import styled.*
 import org.w3c.dom.HTMLSelectElement
 import signUp
+import updateUser
+
+enum class UpdateType {
+    SIGNUP,
+    UPDATE
+}
+
+//TODO: Find a better, less rigid way to do the zipcode
+interface UpdateUserProps : RProps {
+    var username: String?
+    var email: String?
+    var zipcode: String?
+    var gender: String?
+    var updateType: UpdateType
+}
 
 private val scope = MainScope()
 
-val SignupPage = functionalComponent<RProps> { _ ->
-    val (username, setUsername) = useState("test")
+val UpdateUser = functionalComponent<UpdateUserProps> { props ->
+    val (username, setUsername) = useState(props.username)
     val (password, setPassword) = useState("")
-    val (email, setEmail) = useState("")
-    val (zipcode, setZipcode) = useState("")
-//    val (size, setSize) = useState("")
-    val (gender, setGender) = useState("Female")
-    val (hasSubmitted, setHasSubmitted) = useState(false)
+    val (email, setEmail) = useState(props.email)
+    val (zipcode, setZipcode) = useState(props.zipcode)
+    val (gender, setGender) = useState(if(props.gender == null) "Female" else props.gender)
+    val (message, setMessage) = useState("")
 
 
     styledDiv {
@@ -59,14 +72,14 @@ val SignupPage = functionalComponent<RProps> { _ ->
                 }
 
                 child(
-                    InputComponent,
-                    props = jsObject {
-                        onChange = { input ->
-                            setEmail(input)
+                        InputComponent,
+                        props = jsObject {
+                            onChange = { input ->
+                                setEmail(input)
+                            }
+                            type = InputType.email
+                            placeholder = if(props.email == null) "Email" else props.email!!
                         }
-                        type = InputType.email
-                        placeholder = "Email"
-                    }
                 )
             }
 
@@ -76,14 +89,14 @@ val SignupPage = functionalComponent<RProps> { _ ->
                 }
 
                 child(
-                    InputComponent,
-                    props = jsObject {
-                        onChange = { input ->
-                            setUsername(input)
+                        InputComponent,
+                        props = jsObject {
+                            onChange = { input ->
+                                setUsername(input)
+                            }
+                            type = InputType.text
+                            placeholder = if(props.email == null) "Username" else props.username!!
                         }
-                        type = InputType.text
-                        placeholder = "Username"
-                    }
                 )
             }
 
@@ -92,14 +105,15 @@ val SignupPage = functionalComponent<RProps> { _ ->
                     margin(vertical = 20.px)
                 }
                 child (
-                    InputComponent,
-                    props = jsObject {
-                        onChange = { input ->
-                            setPassword(input)
+                        InputComponent,
+                        props = jsObject {
+                            onChange = { input ->
+                                setPassword(input)
+                            }
+                            type = InputType.password
+                            placeholder = "Password"
+
                         }
-                        type = InputType.password
-                        placeholder = "Password"
-                    }
                 )
             }
 
@@ -135,14 +149,17 @@ val SignupPage = functionalComponent<RProps> { _ ->
                         setGender(target.value)
                     }
                     option {
+                        if(props.gender == "Female") attrs.selected = true
                         attrs.value = "Female"
                         +"Female"
                     }
                     option {
+                        if(props.gender == "Male") attrs.selected = true
                         attrs.value = "Male"
                         +"Male"
                     }
                     option {
+                        if(props.gender == "Unisex") attrs.selected = true
                         attrs.value = "Unisex"
                         +"Unisex"
                     }
@@ -156,14 +173,14 @@ val SignupPage = functionalComponent<RProps> { _ ->
                 }
 
                 child (
-                    InputComponent,
-                    props = jsObject {
-                        onChange = { input ->
-                            setZipcode(input)
+                        InputComponent,
+                        props = jsObject {
+                            onChange = { input ->
+                                setZipcode(input)
+                            }
+                            type = InputType.number
+                            placeholder = if(props.zipcode == null) "Zipcode" else props.zipcode!!
                         }
-                        type = InputType.number
-                        placeholder = "Zipcode"
-                    }
                 )
             }
 
@@ -191,14 +208,36 @@ val SignupPage = functionalComponent<RProps> { _ ->
                             color = Color.white
                         }
                     }
-                    +"Sign up"
+                    +"Update Settings"
                     attrs.onClickFunction = {
-                        scope.launch {
-                            try {
-                                signUp(Signup(email, username, password, zipcode.toInt(), gender))
-                                setHasSubmitted(true)
-                            }catch(e: ServerResponseException) {
-                                //show error message here Shiv
+                        //TODO: Validate password on update
+                        if (email == null || (email == "" && props.updateType ==  UpdateType.SIGNUP) ||
+                                gender == null ||
+                                username == null || (username == "" && props.updateType ==  UpdateType.SIGNUP) ||
+                                zipcode == null || (zipcode == "" && props.updateType ==  UpdateType.SIGNUP) ||
+                                (password == "" && props.updateType ==  UpdateType.SIGNUP)
+                        ) {
+                            setMessage("Please fill out all fields")
+                        } else {
+                            scope.launch {
+                                try {
+                                    if (props.updateType == UpdateType.SIGNUP) {
+                                        signUp(Signup(email, username, password, zipcode.toInt(), gender))
+                                        setMessage("Congrats on signing up!  Please return to the login page to login.")
+                                    } else if (props.updateType == UpdateType.UPDATE) {
+                                        //TODO: Allow nullable fields in order to make this more type safe
+                                        if(zipcode == "") {
+                                            updateUser(Signup(email, username, password, props.zipcode!!.toInt(), gender))
+                                        } else {
+                                            updateUser(Signup(email, username, password, zipcode.toInt(), gender))
+                                        }
+                                        setMessage("You have updated your user profile!")
+                                    }
+                                } catch (e: ServerResponseException) {
+                                    setMessage("A user with these values cannot be created.  Please change the entered username, email, or both.")
+                                } catch (e: NumberFormatException) {
+                                    setMessage("The zipcode you have entered is not a number")
+                                }
                             }
                         }
                     }
@@ -209,9 +248,7 @@ val SignupPage = functionalComponent<RProps> { _ ->
                 css {
                     color = Color.white
                 }
-                if(hasSubmitted) {
-                    +"Congrats on signing up!  Please return to the login page to login."
-                }
+                +message
             }
         }
     }

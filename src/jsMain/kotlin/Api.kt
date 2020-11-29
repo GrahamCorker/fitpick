@@ -33,18 +33,25 @@ suspend fun login(login: Login) {
 }
 
 suspend fun signUp(user: Signup) {
-    jsonClient.post<Unit>(endpoint + Signup.path) {
+    jsonClient.post<Unit>(endpoint + "/user" + Signup.path) {
         contentType(ContentType.Application.Json)
         body = user
     }
 }
 
 suspend fun getUser(): Account {
-    return jsonClient.get("$endpoint/user") {
+    return jsonClient.get("$endpoint/user${Account.path}") {
         header("Authorization", "Bearer ${localStorage.getItem("token")}")
     }
 }
 
+suspend fun updateUser(user: Signup) {
+    return jsonClient.put("$endpoint/user${Account.path}") {
+        contentType(ContentType.Application.Json)
+        header("Authorization", "Bearer ${localStorage.getItem("token")}")
+        body = user
+    }
+}
 
 suspend fun getClothingList(): List<ClothingItem> {
     return jsonClient.get(endpoint + ClothingItem.path + "/all"){

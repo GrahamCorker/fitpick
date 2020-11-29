@@ -12,6 +12,7 @@ external interface ItemProps : RProps {
 }
 
 val ListOfItems = functionalComponent<ItemProps> { props ->
+    //TODO: Use this
     val (bookmarkType, setBookmarkType) = useState(props.isBookmark)
     styledDiv {
         css {
@@ -44,6 +45,7 @@ val ListOfItems = functionalComponent<ItemProps> { props ->
             +"Shop Online"
         }
 
+        //TODO: Do this with css
         //Added this to create \n between the link and the picture. For some reason it puts them on the same line
         p { +"" }
 

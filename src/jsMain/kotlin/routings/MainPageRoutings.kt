@@ -2,6 +2,7 @@ package routings
 
 import bigComponents.BookmarkPage
 import bigComponents.HomePage
+import bigComponents.SettingsPage
 import bigComponents.TopTen
 import kotlinx.browser.document
 import kotlinx.browser.localStorage
@@ -16,9 +17,8 @@ import react.router.dom.routeLink
 import react.router.dom.switch
 import styled.*
 
-//private val scope = MainScope()
-
 val MainPageRoutes = functionalComponent<RProps> { _ ->
+    //TODO: See if this is idiomatic for React
     val (currentPage, setCurrentPage) = useState("Home")
 
     browserRouter {
@@ -173,8 +173,9 @@ val MainPageRoutes = functionalComponent<RProps> { _ ->
             }
             route("/settings") {
                 div {
-                    //TODO Add the settings page child here
-                    //child(TopTen)
+                    child(
+                        SettingsPage
+                    )
                 }
             }
             route("/") {
