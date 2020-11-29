@@ -163,8 +163,8 @@ val HomePage = functionalComponent<RProps> { _ ->
                         backgroundColor = Color.floralWhite
                     }
                     clothingList.forEach { temp ->
-                        if (temp.genderPref == gender || gender == "all") {
-                            if (temp.itemType == clothingType || clothingType == "all") {
+                        if (temp.genderPref == gender || gender == GenderEnum.all.toString()) {
+                            if (temp.itemType == clothingType || clothingType == ClothingTypeEnum.all.toString()) {
                                 styledDiv {
                                     css {
                                         display = Display.flex
