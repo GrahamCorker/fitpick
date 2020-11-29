@@ -27,7 +27,7 @@ val SignupPage = functionalComponent<RProps> { _ ->
     val (email, setEmail) = useState("")
     val (zipcode, setZipcode) = useState("")
 //    val (size, setSize) = useState("")
-    val (gender, setGender) = useState("Female")
+    val (gender, setGender) = useState(GenderEnum.female.toString())
     val (hasSubmitted, setHasSubmitted) = useState(false)
 
 
@@ -136,15 +136,15 @@ val SignupPage = functionalComponent<RProps> { _ ->
                         setGender(target.value)
                     }
                     option {
-                        attrs.value = "Female"
+                        attrs.value = GenderEnum.female.toString()
                         +"Female"
                     }
                     option {
-                        attrs.value = "Male"
+                        attrs.value = GenderEnum.male.toString()
                         +"Male"
                     }
                     option {
-                        attrs.value = "Unisex"
+                        attrs.value = GenderEnum.unisex.toString()
                         +"Unisex"
                     }
                 }

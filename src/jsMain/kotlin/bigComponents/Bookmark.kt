@@ -2,12 +2,10 @@ package bigComponents
 
 import ClothingItem
 import OutfitWithClothes
-import bookmarkClothingItem
 import deleteClothingItemBookmark
 import deleteOutfitBookmark
 import getAllClothingBookmarks
 import getAllOutfitBookmarks
-import getClothingList
 import react.*
 import react.dom.*
 import kotlinext.js.*
@@ -49,8 +47,8 @@ var dummyIndex:Int = 0
 private val scope = MainScope()
 val BookmarkPage = functionalComponent<RProps> { _ ->
     var index:Int = 1
-    val (category, setcategory) = useState("headwear")
-    val (gender, setGender) = useState("all")
+    val (category, setcategory) = useState(ClothingTypeEnum.headwear.toString())
+    val (gender, setGender) = useState(GenderEnum.all.toString())
     val (selectitem, setselectitem) = useState<ClothingItem?>(null)
     val (clothingList, setClothingList) = useState(emptyList<ClothingItem>())
     val (outfitList, setOutfitList) = useState(emptyList<OutfitWithClothes>())
@@ -60,7 +58,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
     useEffect(dependencies = listOf()) {
         scope.launch {
             //setClothingList(getClothingList())
-            setClothingList(getAllClothingBookmarks("headwear"))
+            setClothingList(getAllClothingBookmarks(ClothingTypeEnum.headwear.toString()))
         }
     }
 
@@ -87,7 +85,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
             styledButton {
                 css {
-                    if (gender != "male") {
+                    if (gender != GenderEnum.male.toString()) {
                         backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
@@ -100,14 +98,14 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 +"Male"
                 attrs {
                     onClickFunction = {
-                        setGender("male")
+                        setGender(GenderEnum.male.toString())
                     }
                 }
             }
 
             styledButton {
                 css {
-                    if (gender != "female") {
+                    if (gender != GenderEnum.female.toString()) {
                         backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
@@ -120,14 +118,14 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 +"Female"
                 attrs {
                     onClickFunction = {
-                        setGender("female")
+                        setGender(GenderEnum.female.toString())
                     }
                 }
             }
 
             styledButton {
                 css {
-                    if (gender != "unisex") {
+                    if (gender != GenderEnum.unisex.toString()) {
                         backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
@@ -140,14 +138,14 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 +"Unisex"
                 attrs {
                     onClickFunction = {
-                        setGender("unisex")
+                        setGender(GenderEnum.unisex.toString())
                     }
                 }
             }
 
             styledButton {
                 css {
-                    if (gender != "all") {
+                    if (gender != GenderEnum.all.toString()) {
                         backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
@@ -160,7 +158,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 +"All"
                 attrs {
                     onClickFunction = {
-                        setGender("all")
+                        setGender(GenderEnum.all.toString())
                     }
                 }
             }
@@ -190,7 +188,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                     styledButton {
                         css {
                             //TODO: figure out how to reuse this conditional css
-                            if (category != "headwear") {
+                            if (category != ClothingTypeEnum.headwear.toString()) {
                                 backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
@@ -204,10 +202,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
-                                    setselectitem(null);
-                                    setClothingList(getAllClothingBookmarks("headwear"))
+                                    setselectitem(null)
+                                    setClothingList(getAllClothingBookmarks(ClothingTypeEnum.headwear.toString()))
                                 }
-                                setcategory("headwear")
+                                setcategory(ClothingTypeEnum.headwear.toString())
                             }
                         }
                     }
@@ -217,7 +215,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         css {
                             width = 90.pct
                             height = 60.px
-                            if (category != "midSection") {
+                            if (category != ClothingTypeEnum.midSection.toString()) {
                                 backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
@@ -230,10 +228,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
-                                    setselectitem(null);
-                                    setClothingList(getAllClothingBookmarks("midSection"))
+                                    setselectitem(null)
+                                    setClothingList(getAllClothingBookmarks(ClothingTypeEnum.midSection.toString()))
                                 }
-                                setcategory("midSection")
+                                setcategory(ClothingTypeEnum.midSection.toString())
                             }
                         }
                     }
@@ -241,7 +239,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            if (category != "lowerSection") {
+                            if (category != ClothingTypeEnum.lowerSection.toString()) {
                                 backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
@@ -255,10 +253,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
-                                    setselectitem(null);
-                                    setClothingList(getAllClothingBookmarks("lowerSection"))
+                                    setselectitem(null)
+                                    setClothingList(getAllClothingBookmarks(ClothingTypeEnum.lowerSection.toString()))
                                 }
-                                setcategory("lowerSection")
+                                setcategory(ClothingTypeEnum.lowerSection.toString())
                             }
                         }
                     }
@@ -266,7 +264,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            if (category != "footwear") {
+                            if (category != ClothingTypeEnum.footwear.toString()) {
                                 backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
@@ -280,10 +278,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
-                                    setselectitem(null);
-                                    setClothingList(getAllClothingBookmarks("footwear"))
+                                    setselectitem(null)
+                                    setClothingList(getAllClothingBookmarks(ClothingTypeEnum.footwear.toString()))
                                 }
-                                setcategory("footwear")
+                                setcategory(ClothingTypeEnum.footwear.toString())
                             }
                         }
                     }
@@ -291,7 +289,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            if (category != "accessory") {
+                            if (category != ClothingTypeEnum.accessory.toString()) {
                                 backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
@@ -305,10 +303,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
-                                    setselectitem(null);
-                                    setClothingList(getAllClothingBookmarks("accessory"))
+                                    setselectitem(null)
+                                    setClothingList(getAllClothingBookmarks(ClothingTypeEnum.accessory.toString()))
                                 }
-                                setcategory("accessory")
+                                setcategory(ClothingTypeEnum.accessory.toString())
                             }
                         }
                     }
@@ -316,7 +314,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 div {
                     styledButton {
                         css {
-                            if (category != "outfit") {
+                            if (category != ClothingTypeEnum.outfit.toString()) {
                                 backgroundColor = Color.floralWhite
                                 color = Color.black
                             } else {
@@ -330,10 +328,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                         attrs {
                             onClickFunction = {
                                 scope.launch {
-                                    setselectitem(null);
+                                    setselectitem(null)
                                     setOutfitList(getAllOutfitBookmarks())
                                 }
-                                setcategory("outfit")
+                                setcategory(ClothingTypeEnum.outfit.toString())
                             }
                         }
                     }
@@ -377,7 +375,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                             cursor = Cursor.pointer
                                             if(outfit == currentOutfit)
                                             {
-                                                backgroundColor = Color.lightGray;
+                                                backgroundColor = Color.lightGray
                                             }
                                         }
                                         styledDiv {
@@ -479,7 +477,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                 }
                             }
                             clothingList.forEach { temp ->
-                            if (temp.itemType == category && temp.genderPref == gender || gender == "all") {
+                            if (temp.itemType == category && temp.genderPref == gender || gender == GenderEnum.all.toString()) {
                                 styledDiv {
                                     css {
                                         display = Display.flex
@@ -488,7 +486,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                         borderRightStyle = BorderStyle.solid
                                         cursor = Cursor.pointer
                                         if(temp == selectitem) {
-                                            backgroundColor = Color.lightGray;
+                                            backgroundColor = Color.lightGray
                                         }
                                     }
                                     styledDiv {
@@ -586,7 +584,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                     width = 25.pct
                     marginLeft = 10.px
                 }
-                if (category == "outfit"){
+                if (category == ClothingTypeEnum.outfit.toString()){
                     if (currentOutfit != null){
                         child (
                             OutfitCard,

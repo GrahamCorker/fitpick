@@ -5,7 +5,6 @@ import OutfitWithClothes
 import bookmarkClothingItem
 import bookmarkRandomizedOutfit
 import deleteClothingItemBookmark
-import deleteOutfitBookmark
 import getClothingList
 import getRandomizedOutfit
 import react.*
@@ -90,27 +89,27 @@ val HomePage = functionalComponent<RProps> { _ ->
                             setClothingType(target.value)
                         }
                         option {
-                            attrs.value = "all"
+                            attrs.value = ClothingTypeEnum.all.toString()
                             +"All"
                         }
                         option {
-                            attrs.value = "headwear"
+                            attrs.value = ClothingTypeEnum.headwear.toString()
                             +"Headwear"
                         }
                         option {
-                            attrs.value = "midSection"
+                            attrs.value = ClothingTypeEnum.midSection.toString()
                             +"MidSection"
                         }
                         option {
-                            attrs.value = "lowerSection"
+                            attrs.value = ClothingTypeEnum.lowerSection.toString()
                             +"LowerSection"
                         }
                         option {
-                            attrs.value = "footwear"
+                            attrs.value = ClothingTypeEnum.footwear.toString()
                             +"Footwear"
                         }
                         option {
-                            attrs.value = "accessory"
+                            attrs.value = ClothingTypeEnum.accessory.toString()
                             +"Accessory"
                         }
                     }
@@ -135,19 +134,19 @@ val HomePage = functionalComponent<RProps> { _ ->
                             setGender(target.value)
                         }
                         option {
-                            attrs.value = "all"
+                            attrs.value = GenderEnum.all.toString()
                             +"All"
                         }
                         option {
-                            attrs.value = "male"
+                            attrs.value = GenderEnum.male.toString()
                             +"Male"
                         }
                         option {
-                            attrs.value = "female"
+                            attrs.value = GenderEnum.female.toString()
                             +"Female"
                         }
                         option {
-                            attrs.value = "unisex"
+                            attrs.value = GenderEnum.unisex.toString()
                             +"Unisex"
                         }
                     }
