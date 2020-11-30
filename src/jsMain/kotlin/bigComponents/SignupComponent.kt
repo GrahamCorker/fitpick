@@ -5,7 +5,6 @@ import io.ktor.client.features.*
 import react.*
 import react.dom.*
 import kotlinext.js.*
-import kotlinx.browser.document
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.html.js.*
@@ -17,7 +16,6 @@ import kotlinx.html.InputType
 import smallComponents.InputComponent
 import styled.*
 import org.w3c.dom.HTMLSelectElement
-import routings.LoginAndSignupRoutes
 import signUp
 
 private val scope = MainScope()
