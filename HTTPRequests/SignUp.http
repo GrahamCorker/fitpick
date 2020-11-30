@@ -6,7 +6,7 @@ Content-Type: application/json
   "username": "iamauserthisismyname",
   "password": "riderspassword",
   "zipcode": 85202,
-  "gender": "male"
+  "gender": "Male"
 }
 
 ###

@@ -7,7 +7,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoidXNlcjFAZ
     "price": 22.99,
     "siteLink": "https://www.target.com/p/girls-disney-stitch-cosplay-hoodie-blue/-/A-79897412?preselect=79713082#lnk=sametab",
     "isAdult": false,
-    "genderPref": "female",
+    "genderPref": "Female",
     "title": "Disney Stitch Cosplay Hoodie",
     "img": "https://target.scene7.com/is/image/Target/GUEST_d6f4e08c-a6ff-4488-81a5-2c0bd58f4e59?fmt=webp&wid=1400&qlt=80",
     "itemType": "midSection"

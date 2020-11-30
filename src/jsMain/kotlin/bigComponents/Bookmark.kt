@@ -59,7 +59,6 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
     useEffect(dependencies = listOf()) {
         scope.launch {
-            //setClothingList(getClothingList())
             setClothingList(getAllClothingBookmarks("headwear"))
         }
     }
@@ -87,7 +86,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
 
             styledButton {
                 css {
-                    if (gender != "male") {
+                    if (gender != "Male") {
                         backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
@@ -100,14 +99,14 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 +"Male"
                 attrs {
                     onClickFunction = {
-                        setGender("male")
+                        setGender("Male")
                     }
                 }
             }
 
             styledButton {
                 css {
-                    if (gender != "female") {
+                    if (gender != "Female") {
                         backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
@@ -120,14 +119,14 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 +"Female"
                 attrs {
                     onClickFunction = {
-                        setGender("female")
+                        setGender("Female")
                     }
                 }
             }
 
             styledButton {
                 css {
-                    if (gender != "unisex") {
+                    if (gender != "Unisex") {
                         backgroundColor = Color.floralWhite
                         color = Color.black
                     } else {
@@ -140,7 +139,7 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                 +"Unisex"
                 attrs {
                     onClickFunction = {
-                        setGender("unisex")
+                        setGender("Unisex")
                     }
                 }
             }
