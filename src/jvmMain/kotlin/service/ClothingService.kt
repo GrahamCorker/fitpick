@@ -61,13 +61,21 @@ class ClothingService {
         return toClothingWithBookmarks(clothingItem!!, bookmarkService.isClothingItemBookmarked(clothingItem.cid, userId), "")
     }
 
+    //TODO: Put this function into getClothingItemById
+    suspend fun getBookmarkedClothingItemById(cid: Int, createdAt: DateTime): ClothingItem? {
+        return dbQuery {
+            Clothing.select{
+                (Clothing.cid eq cid)
+            }.mapNotNull { toClothingItem(it, true, bookmarkService.getElapsedTime(createdAt)) }.singleOrNull()
+        }
+    }
+
     suspend fun getClothingItemByType(itemType: String, cid: Int, createdAt: DateTime): ClothingItem? {
        return dbQuery {
             Clothing.select{
                 (Clothing.cid eq cid and (Clothing.itemType eq itemType))
             }.mapNotNull { toClothingItem(it, true, bookmarkService.getElapsedTime(createdAt)) }.singleOrNull()
         }
-
     }
 
     //TODO: add optional params isadult, price, and gender

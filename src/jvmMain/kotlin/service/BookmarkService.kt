@@ -39,8 +39,14 @@ class BookmarkService {
         }
 
         //newest bookmarks first
-        return clothingBookmarks.mapNotNull{clothingBookmark ->
-            clothingService.getClothingItemByType(itemType, clothingBookmark.cid, clothingBookmark.createdAt)
+        if(itemType != "all") {
+            return clothingBookmarks.mapNotNull { clothingBookmark ->
+                clothingService.getClothingItemByType(itemType, clothingBookmark.cid, clothingBookmark.createdAt)
+            }.reversed()
+        }
+
+        return clothingBookmarks.mapNotNull { clothingBookmark ->
+            clothingService.getBookmarkedClothingItemById(clothingBookmark.cid, clothingBookmark.createdAt)
         }.reversed()
     }
 
