@@ -208,7 +208,9 @@ val UpdateUser = functionalComponent<UpdateUserProps> { props ->
                             color = Color.white
                         }
                     }
-                    +"Update Settings"
+
+                    if(props.updateType == UpdateType.UPDATE) +"Update Settings" else +"Signup"
+
                     attrs.onClickFunction = {
                         //TODO: Validate password on update
                         if (email == null || (email == "" && props.updateType ==  UpdateType.SIGNUP) ||

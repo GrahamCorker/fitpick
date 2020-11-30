@@ -21,30 +21,21 @@ external interface InputProps : RProps {
 val InputComponent = functionalComponent<InputProps> { props ->
     val (text, setText) = useState("")
 
-//    val submitHandler : (Event) -> Unit = {
-//        it.preventDefault()
-//        setText("")
-//        props.onSubmit(text)
-//    }
-
     val changeHandler: (Event) -> Unit = {
         val value = (it.target as HTMLInputElement).value
         setText(value)
     }
 
-    form {
-//        attrs.onSubmitFunction = submitHandler
-            styledInput (props.type) {
-                css {
-                    width = 100.pct
-                    height = 30.px
-                }
-                attrs {
-                    placeholder = props.placeholder
-                    onChangeFunction = changeHandler
-                    value = text
-                    props.onChange(text)
-                }
-            }
+    styledInput (props.type) {
+        css {
+            width = 100.pct
+            height = 30.px
+        }
+        attrs {
+            placeholder = props.placeholder
+            onChangeFunction = changeHandler
+            value = text
+            props.onChange(text)
+        }
     }
 }
