@@ -47,7 +47,6 @@ fun main() {
                     error("Invalid Credentials")
                 }
                 val token = mapOf("token" to SimpleJWT.jwt.sign(user.email))
-                println(token)
                 call.respond(token)
             }
 
@@ -109,8 +108,10 @@ fun main() {
             authenticate {
                 route(OutfitWithClothes.path)
                 {
-                    get("/random-outfit"){
-                        val randomOutfitObj = outfitService.generateRandomOutfit()
+                    get("/random-outfit/{gender}"){
+                        //TODO: find a way to ensure type safety with this
+                        val gender = call.parameters["gender"] ?: error("Invalid get request")
+                        val randomOutfitObj = outfitService.generateRandomOutfit(gender)
                         call.respond(randomOutfitObj)
                     }
 

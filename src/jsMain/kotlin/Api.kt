@@ -101,8 +101,8 @@ suspend fun getAllOutfitBookmarks(): List<OutfitWithClothes> {
     }
 }
 
-suspend fun getRandomizedOutfit(): OutfitWithClothes {
-    return jsonClient.get(endpoint + OutfitWithClothes.path + "/random-outfit") {
+suspend fun getRandomizedOutfit(gender: OutfitGender): OutfitWithClothes {
+    return jsonClient.get(endpoint + OutfitWithClothes.path + "/random-outfit/${gender.gender}") {
         header("Authorization", "Bearer ${localStorage.getItem("token")}")
     }
 }

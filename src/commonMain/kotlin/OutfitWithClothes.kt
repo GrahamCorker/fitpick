@@ -15,3 +15,9 @@ data class OutfitWithClothes(
         const val path = "/outfit"
     }
 }
+
+//TODO: Make this non nullable
+@Serializable
+data class OutfitGender (
+        val gender: String
+)

@@ -1,6 +1,7 @@
 package bigComponents
 
 import ClothingItem
+import OutfitGender
 import OutfitWithClothes
 import bookmarkClothingItem
 import bookmarkRandomizedOutfit
@@ -35,14 +36,13 @@ val HomePage = functionalComponent<RProps> { _ ->
 
     useEffect(dependencies = listOf()) {
         scope.launch {
-            setRandomBookmark(getRandomizedOutfit())
+            setRandomBookmark(getRandomizedOutfit(OutfitGender(gender)))
             setClothingList(getClothingList())
         }
     }
 
     styledDiv {
         css {
-
             backgroundImage = Image("url('Home_background_Page.jpg')")
             position = Position.fixed
             height = 100.pct
@@ -139,15 +139,15 @@ val HomePage = functionalComponent<RProps> { _ ->
                             +"All"
                         }
                         option {
-                            attrs.value = "male"
+                            attrs.value = "Male"
                             +"Male"
                         }
                         option {
-                            attrs.value = "female"
+                            attrs.value = "Female"
                             +"Female"
                         }
                         option {
-                            attrs.value = "unisex"
+                            attrs.value = "Unisex"
                             +"Unisex"
                         }
                     }
@@ -275,7 +275,7 @@ val HomePage = functionalComponent<RProps> { _ ->
                         attrs.onClickFunction = {
                             setBookmark(false)
                             scope.launch {
-                                setRandomBookmark(getRandomizedOutfit())
+                                setRandomBookmark(getRandomizedOutfit(OutfitGender(gender)))
                             }
                         }
                         +"Randomize"
@@ -325,7 +325,8 @@ val HomePage = functionalComponent<RProps> { _ ->
 
                 styledDiv {
                     css {
-                        height = 90.pct
+                        //TODO: Wrap the list and outfit in a div in order to set their heights equal via css
+                        height = 91.pct
                         width = 95.pct
                     }
                     if (randomBookmark != null) {

@@ -8,8 +8,6 @@ import org.joda.time.DateTime
 
 
 class OutfitService {
-
-
     //TODO: Move this into models
     //Converts Rows of query to Outfit with cids
     private fun toOutfit(row: ResultRow): OutfitObj {
@@ -61,12 +59,12 @@ class OutfitService {
     }
 
     //Inserts an outfit into the database and returns its outfitId
-    suspend fun generateRandomOutfit(): OutfitWithClothes {
-        val cidHead = clothingService.getRandomClothingItem("headwear")
-        val cidMid = clothingService.getRandomClothingItem("midSection")
-        val cidLow = clothingService.getRandomClothingItem("lowerSection")
-        val cidAcc = clothingService.getRandomClothingItem("accessory")
-        val cidFoot = clothingService.getRandomClothingItem("footwear")
+    suspend fun generateRandomOutfit(gender: String): OutfitWithClothes {
+        val cidHead = clothingService.getRandomClothingItem("headwear", gender)
+        val cidMid = clothingService.getRandomClothingItem("midSection", gender)
+        val cidLow = clothingService.getRandomClothingItem("lowerSection", gender)
+        val cidAcc = clothingService.getRandomClothingItem("accessory", gender)
+        val cidFoot = clothingService.getRandomClothingItem("footwear", gender)
         val outfit = OutfitObj(
             outfitId = 0,
             headWear = cidHead!!,
@@ -79,10 +77,6 @@ class OutfitService {
         return toCompleteOutfit(outfit, "")
 
     }
-
-
-
-
 }
 
 val outfitService = OutfitService()

@@ -59,7 +59,6 @@ class ClothingService {
         }
 
         return toClothingWithBookmarks(clothingItem!!, bookmarkService.isClothingItemBookmarked(clothingItem.cid, userId), "")
-
     }
 
     suspend fun getClothingItemByType(itemType: String, cid: Int, createdAt: DateTime): ClothingItem? {
@@ -72,13 +71,22 @@ class ClothingService {
     }
 
     //TODO: add optional params isadult, price, and gender
-    suspend fun getRandomClothingItem(type: String) : Int? = dbQuery {
-        Clothing.slice(Clothing.cid).select {
-                (Clothing.itemType eq type)
-            }.orderBy(Random()).limit(1).mapNotNull { toCid(it) }.singleOrNull()
+    suspend fun getRandomClothingItem(type: String, gender: String): Int? {
+        //TODO: Make this an enum using Shiv's pr
+        if(gender == "all") {
+            return dbQuery {
+                Clothing.slice(Clothing.cid).select {
+                    (Clothing.itemType eq type)
+                }.orderBy(Random()).limit(1).mapNotNull { toCid(it) }.singleOrNull()
+            }
         }
 
-
+        return dbQuery {
+            Clothing.slice(Clothing.cid).select {
+                (Clothing.genderPref eq gender and (Clothing.itemType eq type))
+            }.orderBy(Random()).limit(1).mapNotNull { toCid(it) }.singleOrNull()
+        }
+    }
 }
 
 val clothingService = ClothingService()
