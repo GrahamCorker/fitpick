@@ -34,7 +34,7 @@ INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType)
 
 INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(7.99, 'https://www.target.com/p/girls-39-teddy-fleece-beanie-cat-38-jack-8482-white/-/A-79431707#lnk=sametab', false, 'Female', 'Girls Teddy Fleece Beanie', 'https://target.scene7.com/is/image/Target/GUEST_5425952c-3917-4ee3-b79d-888c395f5ea0?fmt=webp&wid=1400&qlt=80', 'headwear');
 
-INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(9.99, 'https://www.target.com/p/toddler-boys-shark-swim-hat-cat-jack-gray/-/A-76611972?preselect=76491503#lnk=sametab', false, 'Male', 'Toddler Boys Shark Swim Hat', 'https://www.target.com/p/toddler-boys-shark-swim-hat-cat-jack-gray/-/A-76611972?preselect=76491503#lnk=sametab', 'headwear');
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(9.99, 'https://www.target.com/p/toddler-boys-shark-swim-hat-cat-jack-gray/-/A-76611972?preselect=76491503#lnk=sametab', false, 'Male', 'Toddler Boys Shark Swim Hat', 'https://target.scene7.com/is/image/Target/GUEST_abe38380-ae76-4080-8f67-9a0c7e1d859e?wid=325&hei=325&qlt=80&fmt=webp', 'headwear');
 
 INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(9.99, 'https://www.target.com/p/toddler-girls-rainbow-unicorn-hat-cat-jack/-/A-76611970?preselect=76491505#lnk=sametab', false, 'Female', 'Toddler Girls Rainbow Unicorn Hat', 'https://target.scene7.com/is/image/Target/GUEST_d07feb3d-eff1-4950-900d-57833bc7b4f2?fmt=webp&wid=1400&qlt=80', 'headwear');
 
@@ -96,7 +96,7 @@ INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType)
 
 INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(11.99, 'https://www.target.com/p/men-39-s-taco-bell-tank-top-gray-xl/-/A-79429680#lnk=sametab', true, 'Male', 'Mens Taco Bell Tank Top', 'https://target.scene7.com/is/image/Target/GUEST_4892dbc5-e043-4ef4-937e-3b210a28b228?fmt=webp&wid=1400&qlt=80', 'midSection');
 
-INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(15.99, 'https://www.target.com/p/hanes-men-s-ecosmart-fleece-full-zip-hooded-sweatshirt/-/A-54278503?preselect=54236004#lnk=sametab', true, 'Unisex', 'EcoSmart Fleece Full-Zip Hooded Sweatshirt', 'https://www.target.com/p/hanes-men-s-ecosmart-fleece-full-zip-hooded-sweatshirt/-/A-54278503?preselect=54236004#lnk=sametab', 'midSection');
+INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(15.99, 'https://www.target.com/p/hanes-men-s-ecosmart-fleece-full-zip-hooded-sweatshirt/-/A-54278503?preselect=54236004#lnk=sametab', true, 'Unisex', 'EcoSmart Fleece Full-Zip Hooded Sweatshirt', 'https://target.scene7.com/is/image/Target/GUEST_ce449fa7-a494-4fce-b643-341f0d2ba332?wid=325&hei=325&qlt=80&fmt=webp', 'midSection');
 
 INSERT INTO clothing(price, siteLink, isAdult, genderPref, title, img, itemType) VALUES(8.00, 'https://www.target.com/p/women-s-slim-fit-linen-tank-top-a-new-day/-/A-79859664?preselect=79699043#lnk=sametab', true, 'Female', 'Slim Fit Linen Tank Top', 'https://target.scene7.com/is/image/Target/GUEST_a9770994-f6cb-4f89-a576-fd868a25fd36?fmt=webp&wid=1400&qlt=80', 'midSection');
 
