@@ -547,7 +547,10 @@ val BookmarkPage = functionalComponent<RProps> { _ ->
                                                     scope.launch {
                                                         setselectitem(null)
                                                         deleteClothingItemBookmark(temp)
-                                                        setClothingList(getAllClothingBookmarks(temp.itemType))
+
+                                                        setClothingList(getAllClothingBookmarks(
+                                                                if(category == "all") "all" else temp.itemType
+                                                        ))
                                                     }
                                                 }
                                             }
